@@ -29,11 +29,11 @@ async function connectToMySQL() {
   try {
     if(!connection){
       connection = await mysql.createConnection({
-        host: 'localhost',
-        user:'root',
-        password: '',
-        database: 'IMProject',
-        port: 3307
+        host: process.env.DB_HOST || 'localhost',
+        user: process.env.DB_USER || 'root',
+        password: process.env.DB_PASSWORD || '',
+        database: process.env.DB_NAME || 'IMProject',
+        port: Number(process.env.DB_PORT) || 3306
       });
       console.log('Connected to MySQL');
     }
@@ -42,6 +42,13 @@ async function connectToMySQL() {
     console.error('Database connection error:', err);
     throw err;
   }
+}
+
+async function getDatabase() {
+  if (!db) {
+    db = await connectToMySQL();
+  }
+  return db;
 }
 
 connectToMySQL().then(connection => {
@@ -77,8 +84,9 @@ app.get("/api/userinfo", isAuthenticated, async (req, res) => {
     return res.status(401).json({ message: 'Unauthorized: No user logged in' });
   }
   try {
+    const database = await getDatabase();
     const userQuery = "SELECT fname, lname, email FROM users WHERE user_id = ?";
-    const [userResults] = await db.execute(userQuery, [userId]);
+    const [userResults] = await database.execute(userQuery, [userId]);
 
     if (userResults.length > 0) {
       const user = userResults[0];
@@ -102,8 +110,9 @@ app.get("/api/admininfo", isAuthenticated, async (req, res) => {
     return res.status(401).json({ message: 'Unauthorized: No admin logged in' });
   }
   try {
+    const database = await getDatabase();
     const adminQuery = "SELECT fname, lname, email FROM admin WHERE admin_id = ?";
-    const [adminResults] = await db.execute(adminQuery, [adminId]);
+    const [adminResults] = await database.execute(adminQuery, [adminId]);
 
     if (adminResults.length > 0) {
       const admin = adminResults[0];
@@ -125,8 +134,9 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
   const { email, password } = req.body;
 
   try {
+    const database = await getDatabase();
     const adminQuery = "SELECT * FROM admin WHERE email =? AND pass =?";
-    const [adminResults] = await db.execute(adminQuery, [email, password]);
+    const [adminResults] = await database.execute(adminQuery, [email, password]);
 
     if (adminResults.length > 0) {
       req.session.isAuthenticated = true;
@@ -135,7 +145,7 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
     }
 
     const userQuery = "SELECT * FROM users WHERE email =? AND pass =?";
-    const [userResults] = await db.execute(userQuery, [email, password]);
+    const [userResults] = await database.execute(userQuery, [email, password]);
 
     if (userResults.length > 0) {
       req.session.isAuthenticated = true; 
@@ -169,6 +179,9 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
     }
   } catch (error) {
     console.error('Login error:', error);
+    if (error.code === 'ECONNREFUSED' || error.code === 'ER_BAD_DB_ERROR') {
+      return res.status(503).send("Login is temporarily unavailable. Start MySQL and make sure the IMProject database exists.");
+    }
     res.status(500).send("Server error during login.");
   }
 });
@@ -189,8 +202,9 @@ app.post("/signup", bodyParser.urlencoded({ extended: false }), async (req, res)
   }
 
   try {
+    const database = await getDatabase();
     const query = "INSERT INTO users (fname, lname, email, pass) VALUES (?, ?, ?, ?)";
-    const [result] = await db.execute(query, [fname, lname, email, pass]);
+    const [result] = await database.execute(query, [fname, lname, email, pass]);
 
     if (result.affectedRows > 0) {
       req.session.isAuthenticated = true;
@@ -243,7 +257,8 @@ app.post("/rental", encoder, async (req, res) => {
   }
 
   try {
-    const [userResults] = await connection.execute(
+    const database = await getDatabase();
+    const [userResults] = await database.execute(
       "SELECT user_id FROM users WHERE fname = ? AND lname = ? AND email = ?",
       [fname, lname, email]
     );
@@ -254,7 +269,7 @@ app.post("/rental", encoder, async (req, res) => {
 
     const userId = userResults[0].user_id;
 
-    const [vehicleResults] = await connection.execute(
+    const [vehicleResults] = await database.execute(
       "SELECT vehicle_id, base_rate, gas_rate FROM vehicle WHERE model = ?",
       [model]
     );
@@ -299,7 +314,7 @@ app.post("/rental", encoder, async (req, res) => {
 
     console.log("Insert values:", values);
 
-    const [result] = await connection.execute(insertQuery, values);
+    const [result] = await database.execute(insertQuery, values);
 
     if (result.affectedRows > 0) {
       res.redirect("/transaction-success");
@@ -382,10 +397,11 @@ const getTransactionsQuery = () => `
 
 app.get("/api/transactionsAdmin", isAuthenticated, async (req, res) => {
   try {
+    const database = await getDatabase();
     const limitValue = parseInt(req.query.limit) || 20;
     const offsetValue = parseInt(req.query.offset) || 0;
 
-    const [rows] = await db.query(getTransactionsQuery(), [limitValue, offsetValue]);
+    const [rows] = await database.query(getTransactionsQuery(), [limitValue, offsetValue]);
     
     res.json({
       total: rows.length,
@@ -401,7 +417,8 @@ app.get("/api/transactionDetails/:transactionID", isAuthenticated, async (req, r
   const transactionID = req.params.transactionID;
 
   try {
-    const [rows] = await db.query(`
+    const database = await getDatabase();
+    const [rows] = await database.query(`
       SELECT 
         t.id AS transactionNo, 
         CONCAT(u.fname, ' ', u.lname) AS fullName, 
@@ -479,7 +496,12 @@ app.get("/transactions", isAuthenticated, function(req, res) {
 });
 
 app.get("/vehicles", isAuthenticated, (req, res) => {
-  res.sendFile(__dirname + "/vehicles.html");
+  const page = req.session.adminId ? "vehicleADMIN.html" : "vehiclesUSER.html";
+  res.sendFile(path.join(__dirname, page));
+});
+
+app.get("/transactionsAdmin", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "transactionsAdmin.html"));
 });
 
 app.get("/about", isAuthenticated, (req, res) => {
