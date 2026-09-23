@@ -33,7 +33,7 @@ async function connectToMySQL() {
         user: process.env.DB_USER || 'root',
         password: process.env.DB_PASSWORD || '',
         database: process.env.DB_NAME || 'IMProject',
-        port: Number(process.env.DB_PORT) || 3306
+        port: Number(process.env.DB_PORT) || 3307
       });
       console.log('Connected to MySQL');
     }
@@ -214,6 +214,12 @@ app.post("/signup", bodyParser.urlencoded({ extended: false }), async (req, res)
     }
   } catch (error) {
     console.error('Signup error:', error);
+    if (error.code === 'ECONNREFUSED' || error.code === 'ER_BAD_DB_ERROR') {
+      return res.status(503).send("Sign up is temporarily unavailable. Start MySQL and make sure the IMProject database exists.");
+    }
+    if (error.code === 'ER_DUP_ENTRY') {
+      return res.status(409).send("That email is already registered. Please use a different email or log in.");
+    }
     res.status(500).send("Error occurred during signup.");
   }
 });
