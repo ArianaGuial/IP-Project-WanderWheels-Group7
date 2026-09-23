@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/aboutUS.css">
+</head>
+<body class="bg-white text-gray-800">
+    <header class="header">
+        <img src="/img/logo.png" alt="Logo" class="logo">
+        <h1>Wander Wheels</h1>
+        <nav>
+            <ul>
+                <li><a href="./home.html">Home</a></li>
+                <li><a href="./vehicleUSER.html">Vehicles</a></li>
+                <li><a href="/OurTeam.html">Our Team</a></li>
+                <li><a href="/about" class="active">About Us</a></li>
+                <li><a href="./contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="profile-menu">
+            <div class="profile-name" id="profile-menu">
+                <img src="/img/profile1-1-2.png" alt="User Profile" class="user-pic" id="user-pic">
+                <span class="dropdown-icon"><img class="dropdown-icon" src="img/Arrow (Down).svg" /></span>
+            </div>
+
+            <div class="profile-dropdown" id="profile-dropdown">
+                <div class="profile-name">
+                    <img src="/img/profile1-1-2.png" class="dropdown-img">
+                    <h1 class="user-info">User Name</h1>
+                </div>
+                <a href="#" class="sub-menu-link">
+                    <p>My Profile</p>
+                    <span></span>
+                </a>
+                <hr>
+                <a href="#" class="sub-menu-link">
+                    <p>Settings</p>
+                    <span></span>
+                </a>
+                <hr>
+                <a href="#" class="sub-menu-link">
+                    <p>History</p>
+                    <span></span>
+                </a>
+                <hr>
+                <div class="help-signout-container">
+                    <a href="#" class="sub-menu-link">
+                        <p>HELP</p>
+                        <span></span>
+                    </a>
+                    <a href="#" class="sub-menu-link" id="sign-out-link">
+                        <p>SIGN OUT</p>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="title">
+        <h1>ABOUT US</h1>
+    </div>
+    <div class="car">
+        <img src="./img/display.png" alt="Background Cars">
+    </div>
+    <section class="content">
+        <h2>Welcome to WanderWheels!</h2>
+        <p>At WanderWheels, we're more than just a car rental service—we're your trusted partner in exploring the
+            vibrant beauty of Cebu. Our mission is to provide seamless, unforgettable travel experiences with modern,
+            reliable vehicles tailored to your adventure. Whether it’s a family getaway, a business trip, or a solo
+            exploration, we’ve got you covered.</p>
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Safety First</h3>
+                <p>Your safety is our top priority. We ensure every vehicle undergoes thorough maintenance and
+                    inspections to guarantee a safe driving experience.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-user-friends"></i>
+                <h3>Customer-Centric</h3>
+                <p>Our friendly team is here for you, providing personalized service and support to make every rental
+                    experience exceptional.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-balance-scale"></i>
+                <h3>Integrity & Transparency</h3>
+                <p>We pride ourselves on clear communication and fair pricing. As a fully registered company, there are
+                    no hidden fees—just transparent service.</p>
+            </div>
+        </div>
+        <h2>What We Offer</h2>
+        <p>From compact cars to spacious SUVs, our fleet includes modern models from 2020 to 2024. You can choose
+            self-drive options for complete freedom or select an all-inclusive package with professional drivers who
+            know Cebu inside out. We’re conveniently located in Mandaue, with flexible pickup and delivery services,
+            including Mactan Cebu International Airport, the port, or your hotel.</p>
+        <h2>Join Us on Your Journey</h2>
+        <p>Explore Cebu like never before—from pristine beaches to the bustling city streets. Thank you for choosing
+            WanderWheels—we look forward to helping you create unforgettable memories</p>
+    </section>
+    <footer class="bg-black text-white text-center py-4">
+        <p>Copyright 2024 - Wander Wheels. All Rights Reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleMenu = () => {
+                const submenu = document.getElementById("profile-dropdown");
+                submenu.classList.toggle("open-menu");
+            };
+            document.querySelector('.dropdown-icon').addEventListener('click', toggleMenu);
+            fetchUserInfo();
+        });
+
+        function fetchUserInfo() {
+            fetch('/api/userinfo')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('User Info:', data);
+                    const userInfoElement = document.querySelector('.user-info');
+                    if (userInfoElement) {
+                        userInfoElement.textContent = `${data.firstName} ${data.lastName}`.trim();
+                    } else {
+                        console.error('User info element not found');
+                        alert('User info element not found');
+                    }
+                    const fnameInput = document.getElementById('fname');
+                    const lnameInput = document.getElementById('lname');
+                    const emailInput = document.getElementById('email');
+
+                    if (fnameInput) {
+                        fnameInput.value = data.firstName || '';
+                    } else {
+                        console.warn('First name input not found');
+                    }
+
+                    if (lnameInput) {
+                        lnameInput.value = data.lastName || '';
+                    } else {
+                        console.warn('Last name input not found');
+                    }
+
+                    if (emailInput) {
+                        emailInput.value = data.email || '';
+                    } else {
+                        console.warn('Email input not found');
+                    }
+
+                })
+                .catch(error => {
+                    console.error('Error fetching user info:', error);
+                    alert('Failed to fetch user info. Please try again.');
+                });
+        }
+
+        window.onload = fetchUserInfo;
+
+        document.getElementById('sign-out-link').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Logout successful. Redirecting to login.html...');
+                        window.location.href = '/login';
+                    } else {
+                        console.error('Logout failed');
+                        alert('Logout failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during logout:', error);
+                    alert('Error during logout. Please try again.');
+                });
+        });
+    </script>
+</body>
+</html>

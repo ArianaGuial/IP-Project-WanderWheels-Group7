@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.3051 5.38983C21.2412 5.38983 22 4.63099 22 3.69492C22 2.75884 21.2412 2 20.3051 2C19.369 2 18.6102 2.75884 18.6102 3.69492C18.6102 4.63099 19.369 5.38983 20.3051 5.38983Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 5.38983C12.9361 5.38983 13.6949 4.63099 13.6949 3.69492C13.6949 2.75884 12.9361 2 12 2C11.064 2 10.3051 2.75884 10.3051 3.69492C10.3051 4.63099 11.064 5.38983 12 5.38983Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.69492 5.38983C4.63099 5.38983 5.38983 4.63099 5.38983 3.69492C5.38983 2.75884 4.63099 2 3.69492 2C2.75884 2 2 2.75884 2 3.69492C2 4.63099 2.75884 5.38983 3.69492 5.38983Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.69492 22C4.63099 22 5.38983 21.2412 5.38983 20.3051C5.38983 19.369 4.63099 18.6102 3.69492 18.6102C2.75884 18.6102 2 19.369 2 20.3051C2 21.2412 2.75884 22 3.69492 22Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 22C12.9361 22 13.6949 21.2412 13.6949 20.3051C13.6949 19.369 12.9361 18.6102 12 18.6102C11.064 18.6102 10.3051 19.369 10.3051 20.3051C10.3051 21.2412 11.064 22 12 22Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.3051 5.38983V10.1356C20.3051 11.0717 19.5462 11.8305 18.6101 11.8305H3.69489V18.6102" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.69489 11.8305V5.38983" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 5.38983V18.6102" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.3051 22C21.2412 22 22 21.2412 22 20.3051C22 19.369 21.2412 18.6102 20.3051 18.6102C19.369 18.6102 18.6102 19.369 18.6102 20.3051C18.6102 21.2412 19.369 22 20.3051 22Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.3051 15.2203V18.6102" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

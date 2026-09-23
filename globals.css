@@ -1,0 +1,24 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:400,700,600|Inter:400,500,700,600|Urbanist:400,900,600,italic");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+@font-face {
+  font-family: "Font Awesome 6 Free-Solid";
+  src: url("https://anima-uploads.s3.amazonaws.com/projects/6339b9b6cff130481da234b3/fonts/font-awesome-6-free-regular-400.otf")
+    format("opentype");
+}

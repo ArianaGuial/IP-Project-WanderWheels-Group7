@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.up {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 100px;
+    z-index: 2;
+}
+
+.up h1 {
+    font-size: 30px;
+    color: white;
+    text-shadow: 
+        -0.5px -0.5px 0 #000,  
+         0.5px -0.5px 0 #000,
+        -0.5px  0.5px 0 #000,
+         0.5px  0.5px 0 #000;
+    font-family: "Yusei Magic", sans-serif;
+}
+
+.logo {
+    width: 70px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.bg {
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(to bottom, #FFD35A, #E85C0D);
+    flex: 1;
+    position: relative;
+}
+
+.orange-car {
+    position: absolute;
+    width: 30%;
+    height: auto;
+    top: 53%;
+    left: 32%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.form {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 450px;
+    padding: 20px;
+    z-index: 2;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form input {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    display: block;
+    height: 60px;
+    width: 60%;
+    padding-left: 20px;
+    border-radius: 15px;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.form input[type="submit"] {
+    background: #E85C0D;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    width: 25%;
+    font-family: "REM", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    margin-left: 18%;
+}
+
+.form input[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+form {
+    width: 600px;
+    margin-left: 70%;
+}
+
+.form input::placeholder {
+    color: black;
+    opacity: 1;  
+}
+
+.account-link {
+    margin-left: 42%; 
+    text-align: right;
+}
+
+.account-link a {
+    color: #EB5B00;
+}
+
+.title {
+    text-align: center;
+    margin-top: 5%;
+    margin-left: 43%;
+    margin-bottom: 20px;
+    width: 40%;
+}
+
+.title p {
+    color: #021526;
+    font-family: "REM", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 30px;
+}
+
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    padding: 2px;
+    background-color: black;
+}

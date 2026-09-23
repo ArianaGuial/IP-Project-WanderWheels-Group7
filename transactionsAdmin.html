@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link rel="stylesheet" href="/assets/transactionsAdmin.css?v=1.0">
+</head>
+<body>
+    <div id="transaction-modal" class="modal">
+        <div id="modal-content" class="modal-content">
+            <span id="modal-close" class="close">&times;</span>
+            <h2>Transaction Details</h2>
+        </div>
+    </div>   
+
+    <header class="header">
+        <img src="./img/logo.png" alt="Logo" class="logo">
+        <h1>Wander Wheels</h1>
+        <nav>
+            <ul>
+                <li><a href="/vehicles">Our Vehicles</a></li>
+                <li><a href="/transactionsAdmin" class="active">Our Transactions</a></li>
+            </ul>
+        </nav>
+
+        <div class="profile-menu">
+            <div class="profile-name" id="profile-menu">
+                <img src="/img/Profile3.png" alt="User Profile" class="user-pic" id="user-pic">
+                <span class="dropdown-icon"><img class="dropdown-icon" src="img/Arrow (Down).svg" /></span>
+            </div>
+
+            <div class="profile-dropdown" id="profile-dropdown">
+                <div class="profile-name">
+                    <img src="/img/Profile3.png" class="dropdown-img">
+                    <h1 id="admin-name">Admin</h1>
+                </div>
+                <a href="#" class="sub-menu-link">
+                    <p>My Profile</p>
+                    <span></span>
+                </a>
+                <hr>
+                <a href="#" class="sub-menu-link">
+                    <p>Settings</p>
+                    <span></span>
+                </a>
+                <hr>
+                <div class="help-signout-container">
+                    <a href="#" class="sub-menu-link">
+                        <p>HELP</p>
+                        <span></span>
+                    </a>
+                    <a href="#" class="sub-menu-link" id="sign-out-link">
+                        <p>SIGN OUT</p>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="transac-header">
+            <h2>Recent Transactions</h2>
+            <button class="filter-btn">
+                <img src="img/filter-icon.png" alt="Filter"> Filter
+            </button>
+        </div>
+        <table class="transaction-table">
+            <thead>
+                <tr>
+                    <th>Transaction No.</th>
+                    <th>Name</th>
+                    <th>Pickup Date</th>
+                    <th>Time</th>
+                    <th>Return Date</th>
+                    <th>Pickup & Drop Off Location</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th class="details-white">Details</th>
+                </tr>
+            </thead>
+            <tbody id="transaction-body">
+                <tr id="loading-row">
+                    <td colspan="9"> Loading...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>   
+    
+    <footer>Copyright © 2024 - Wander Wheels. All Rights Reserved.</footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchAdminInfo();
+
+            function fetchAdminInfo() {
+                fetch('/api/admininfo', {credentials: 'include'})
+                .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                })
+                .then(data => {
+                        console.log('Admin Info:', data);
+
+                        const profileDropdown = document.getElementById('profile-dropdown');
+                        const adminNameElement = document.getElementById('admin-name');
+
+                        if (adminNameElement) {
+                            adminNameElement.textContent = `${data.firstName} ${data.lastName}`.trim();
+                        } else {
+                            console.error('Admin name element not found');
+                        }
+                        
+                        const fnameInput = document.getElementById('fname');
+                        const lnameInput = document.getElementById('lname');
+                        const emailInput = document.getElementById('email');
+
+                        if (fnameInput) {
+                            fnameInput.value = data.firstName || '';
+                        } else {
+                            console.warn('First name input not found');
+                        }
+
+                        if (lnameInput) {
+                            lnameInput.value = data.lastName || '';
+                        } else {
+                            console.warn('Last name input not found');
+                        }
+
+                        if (emailInput) {
+                            emailInput.value = data.email || '';
+                        } else {
+                            console.warn('Email input not found');
+                        }
+                })
+                .catch(error => {
+                        console.error('Error fetching admin info:', error);
+                        alert('Failed to fetch admin info. Please try again.');
+                });
+            }
+            
+            const toggleMenu = () => {
+                const submenu = document.getElementById("profile-dropdown");
+                submenu.classList.toggle("open-menu");
+            };
+
+            document.querySelector('.dropdown-icon').addEventListener('click', toggleMenu);
+            
+            const transactionBody = document.getElementById('transaction-body');
+            const modal = document.getElementById('transaction-modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalClose = document.getElementById("modal-close");
+
+            function showModal() {
+                modal.style.display = "block";
+            }
+
+            function hideModal() {
+                modal.style.display = "none";
+            }
+
+            modalClose.addEventListener("click", hideModal);
+
+            window.addEventListener("click", (event) => {
+                if (event.target === modal) {
+                    hideModal();
+                }
+            });
+
+            function fetchTransactions() {
+                fetch('/api/transactionsAdmin')
+                    .then(response => response.json())
+                    .then(data => {
+                        transactionBody.innerHTML = '';
+                        if (data.transactions && Array.isArray(data.transactions)) {
+                            data.transactions.forEach(item => {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td>${item.transactionNo}</td> 
+                                    <td>${item.name}</td>
+                                    <td>${item.pickup_date}</td>
+                                    <td>${item.rent_time}</td>
+                                    <td>${item.dropoff_date}</td>
+                                    <td>${item.pickup_location}</td>
+                                    <td>₱${isNaN(parseFloat(item.total_amount)) ? 'N/A' : parseFloat(item.total_amount).toFixed(2)}</td>
+                                    <td class="status">${item.status}</td>
+                                    <td><button class="view-details-btn" data-transaction-id="${item.transactionNo}">View Details</button></td>
+                                `;
+                                transactionBody.appendChild(row);
+
+                                const statusCell = row.querySelector('.status');
+                                switch (item.status.toLowerCase()) {
+                                    case 'pending':
+                                        statusCell.style.color = 'orange';
+                                        break;
+                                    case 'confirmed':
+                                        statusCell.style.color = 'green';
+                                        break;
+                                    case 'cancelled':
+                                        statusCell.style.color = 'red';
+                                        break;
+                                    case 'done':
+                                        statusCell.style.color = 'blue';
+                                        break;
+                                    default:
+                                        statusCell.style.color = 'black';
+                                }
+
+                                const viewDetailsBtn = row.querySelector('.view-details-btn');
+                                viewDetailsBtn.addEventListener('click', () => {
+                                    fetchTransactionDetails(item.transactionNo);
+                                });
+                            });
+                        } else {
+                            transactionBody.innerHTML = '<tr><td colspan="9">Unexpected data format</td></tr>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching transactions:', error);
+                        transactionBody.innerHTML = '<tr><td colspan="9">Error loading transactions</td></tr>';
+                    });
+            }
+
+            function fetchTransactionDetails(transactionID) {
+                fetch(`/api/transactionDetails/${transactionID}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error:', data.error);
+                            return;
+                        }
+
+                        modalContent.innerHTML = `
+                            <h2>Transaction Details</h2>
+                            <h3>Transaction No:</h3> ${data.transactionNo || 'N/A'}
+                            <p><strong>Transaction Date:</strong> ${data.reservationDate}</p>
+                            <p><strong>Customer Name:</strong> ${data.fullName || 'N/A'}</p>
+                            <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
+                            <p><strong>Pickup Date:</strong> ${data.pickupDate}</p>
+                            <p><strong>Rent Time:</strong> ${data.rentTime || 'N/A'}</p>
+                            <p><strong>Pickup Location:</strong> ${data.pickupLocation || 'N/A'}</p>
+                            <p><strong>Dropoff Date:</strong> ${data.dropoffDate}</p>
+                            <p><strong>Rental Days:</strong> ${data.rentalDays || 'N/A'}</p>
+                            <p><strong>Total Amount:</strong> ₱${parseFloat(data.totalAmount || 0).toFixed(2)}</p>
+                            <p><strong>Status:</strong> ${data.status || 'N/A'}</p>
+                            <p><strong>Additional Message:</strong> ${data.additionalMessage || 'N/A'}</p>
+                            <h3>Vehicle Details</h3>
+                            <p><strong>Model:</strong> ${data.vehicle.model || 'N/A'}</p>
+                            <p><strong>License Plate:</strong> ${data.vehicle.licensePlate || 'N/A'}</p>
+                            <p><strong>Type:</strong> ${data.vehicle.type || 'N/A'}</p>
+                            <p><strong>Gas Rate:</strong> ₱${data.vehicle.gasRate || 0}</p>
+                            <p><strong>Base Rate:</strong> ₱${data.vehicle.baseRate || 0}</p>
+                        `;
+                        showModal();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching transaction details:', error);
+                    });
+            }
+
+            fetchTransactions();
+             
+            document.getElementById('sign-out-link').addEventListener('click', function(event) {
+                event.preventDefault();
+        
+                fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Logout successful. Redirecting to login.html...');
+                        window.location.href = '/login'; 
+                    } else {
+                        console.error('Logout failed');
+                        alert('Logout failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during logout:', error);
+                    alert('Error during logout. Please try again.');
+                });
+            });
+        });
+    </script>
+        
+</body>
+
+</html>
