@@ -128,7 +128,6 @@
                 <div class="frame-3">
                   <div class="text-wrapper-8">About Us</div>
                   <div class="text-wrapper-7">Contact Us</div>
-                  <div class="text-wrapper-7">Our Team</div>
                 </div>
               </div>
               <div class="div-wrapper"><div class="text-wrapper-6">Links</div></div>
@@ -156,6 +155,7 @@
             </div>
           </div>
         </div>
+        
         <header class="header">
           <img src="./img/logo.png" alt="Logo" class="logo">
           <h1>Wander Wheels</h1>
@@ -163,13 +163,19 @@
               <ul>
                   <li><a href="/home" class="active">Home</a></li>
                   <li><a href="/vehicles">Vehicles</a></li>
-                  <li><a href="/team">Our Team</a></li>
-                  <li><a href="/about">About Us</a></li>
-                  <li><a href="/contact">Contact Us</a></li>
               </ul>
           </nav> 
           
-          <div class="profile-menu">
+          <div class="buttons" id="buttons-container" style="display: none;">
+            <form action="/login" method="GET">
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+            <form action="/signup" method="GET">
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+          </div>
+
+          <div class="profile-menu" id="profile-container" style="display: none;">
             <div class="profile-name" id="profile-menu">
                 <img src="/img/profile1-1-2.png" alt="User Profile" class="user-pic" id="user-pic">
                 <span class="dropdown-icon"><img class="dropdown-icon" src="img/Arrow (Down).svg" /></span>
@@ -178,7 +184,7 @@
             <div class="profile-dropdown" id="profile-dropdown">
                 <div class="profile-name">
                     <img src="/img/profile1-1-2.png" class="dropdown-img">
-                    <h1 class="user-info">User Name</h1>
+                    <h1 class="user-info">Guest User</h1>
                 </div>
                 <a href="#" class="sub-menu-link">
                     <p>My Profile</p>
@@ -200,15 +206,15 @@
                         <p>HELP</p>
                         <span></span>
                     </a>
-                    <a href="#" class="sub-menu-link" id="sign-out-link">
+                    <a href="/login" class="sub-menu-link" id="sign-out-link">
                         <p>SIGN OUT</p>
                         <span></span>
                     </a>
                 </div>
             </div>
         </div>
-
       </header> <hr class="line">
+      
         <div class="booking-form">
           <div class="overlap">
             <div class="frame-for-booking">
@@ -345,81 +351,60 @@
               const submenu = document.getElementById("profile-dropdown");
               submenu.classList.toggle("open-menu");
           };
-          document.querySelector('.dropdown-icon').addEventListener('click', toggleMenu);
-          fetchUserInfo();
-      });
-
-      function fetchUserInfo() {
-          fetch('/api/userinfo')
-             .then(response => {
-                  if (!response.ok) {
-                      throw new Error(`HTTP error! status: ${response.status}`);
-                  }
-                  return response.json();
-             })
-             .then(data => {
-                  console.log('User Info:', data);
-                  const userInfoElement = document.querySelector('.user-info');
-                  if (userInfoElement) {
-                      userInfoElement.textContent = `${data.firstName} ${data.lastName}`.trim();
-                  } else {
-                      console.error('User info element not found');
-                      alert('User info element not found');
-                  }
-                  const fnameInput = document.getElementById('fname');
-                  const lnameInput = document.getElementById('lname');
-                  const emailInput = document.getElementById('email');
-
-                  if (fnameInput) {
-                      fnameInput.value = data.firstName || '';
-                  } else {
-                      console.warn('First name input not found');
-                  }
-
-                  if (lnameInput) {
-                      lnameInput.value = data.lastName || '';
-                  } else {
-                      console.warn('Last name input not found');
-                  }
-
-                  if (emailInput) {
-                      emailInput.value = data.email || '';
-                  } else {
-                      console.warn('Email input not found');
-                  }
-                  
-             })
-             .catch(error => {
-                  console.error('Error fetching user info:', error);
-                  alert('Failed to fetch user info. Please try again.');
-             });
+          const dropdownIcon = document.querySelector('.dropdown-icon');
+          if (dropdownIcon) {
+              dropdownIcon.addEventListener('click', toggleMenu);
           }
 
-      window.onload = fetchUserInfo;
+          fetch('/api/auth-status')
+            .then(res => res.json())
+            .then(data => {
+                const buttonsContainer = document.getElementById('buttons-container');
+                const profileContainer = document.getElementById('profile-container');
 
-      document.getElementById('sign-out-link').addEventListener('click', function(event) {
-          event.preventDefault();
-
-          fetch('/logout', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              }
-          })
-         .then(response => {
-              if (response.ok) {
-                  console.log('Logout successful. Redirecting to login.html...');
-                  window.location.href = '/login'; 
-              } else {
-                  console.error('Logout failed');
-                  alert('Logout failed. Please try again.');
-              }
-          })
-         .catch(error => {
-              console.error('Error during logout:', error);
-              alert('Error during logout. Please try again.');
-          });
+                if (data.isLoggedIn) {
+                    if (profileContainer) profileContainer.style.display = 'block';
+                    if (buttonsContainer) buttonsContainer.style.display = 'none';
+                    const userInfo = document.querySelector('.user-info');
+                    if (userInfo) userInfo.textContent = data.userName;
+                } else {
+                    if (buttonsContainer) buttonsContainer.style.display = 'flex';
+                    if (profileContainer) profileContainer.style.display = 'none';
+                }
+            })
+            .catch(err => console.error('Error fetching auth status:', err));
       });
-</script>
-</body>
+
+      document.querySelector('.button-2').addEventListener('click', () => {
+        window.location.href = '/vehicles';
+      });
+
+      document.querySelector('.button-view-all').addEventListener('click', () => {
+        window.location.href = '/vehicles';
+      });
+
+      document.querySelector('.button-3').addEventListener('click', () => {
+        alert('Booking submitted! (Demo: No database is connected).');
+      });
+
+      const signOutLink = document.getElementById('sign-out-link');
+      if (signOutLink) {
+          signOutLink.addEventListener('click', function (event) {
+              event.preventDefault();
+              fetch('/logout', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' }
+              })
+              .then(response => {
+                  if (response.ok) {
+                      window.location.href = '/login';
+                  }
+              })
+              .catch(error => {
+                  console.error('Error during logout:', error);
+              });
+          });
+      }
+    </script>
+  </body>
 </html>

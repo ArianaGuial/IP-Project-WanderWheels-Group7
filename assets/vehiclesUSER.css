@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Work+Sans:400,700,600|Inter:400,500,700,600|Urbanist:400,900,600,italic");
 
-
 * {
   padding: 0;
   margin: 0;
@@ -11,9 +10,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-}
-
-body {
   max-width: 100vw;
   overflow-x: hidden;
   height: 100vh;
@@ -269,7 +265,6 @@ footer {
   background-color: black;
 }
 
-/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
@@ -319,4 +314,50 @@ footer {
   display: block;
   margin: 20px auto 0;
   width: 50%;
+}
+
+.header .buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header .login-btn {
+  background-color: transparent;
+  color: #e85c0d;
+  border: 2px solid #e85c0d;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  margin: 0;
+}
+
+.header .login-btn:hover {
+  background-color: #e85c0d;
+  color: white;
+}
+
+.header .signup-btn {
+  background-color: #f5a623;
+  color: white;
+  border: 2px solid #f5a623;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  margin: 0;
+}
+
+.header .signup-btn:hover {
+  background-color: #e0961f;
+  border-color: #e0961f;
 }

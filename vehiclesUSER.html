@@ -15,13 +15,19 @@
             <ul>
                 <li><a href="/home">Home</a></li>
                 <li><a href="/vehicles" class="active">Vehicles</a></li>
-                <li><a href="/team">Our Team</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/contact">Contact Us</a></li>
             </ul>
         </nav>
 
-        <div class="profile-menu">
+        <div class="buttons" id="buttons-container" style="display: none;">
+            <form action="/login" method="GET">
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+            <form action="/signup" method="GET">
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+        </div>
+
+        <div class="profile-menu" id="profile-container" style="display: none;">
             <div class="profile-name" id="profile-menu">
                 <img src="/img/profile1-1-2.png" alt="User Profile" class="user-pic" id="user-pic">
                 <span class="dropdown-icon"><img class="dropdown-icon" src="img/Arrow (Down).svg" /></span>
@@ -30,7 +36,7 @@
             <div class="profile-dropdown" id="profile-dropdown">
                 <div class="profile-name">
                     <img src="/img/profile1-1-2.png" class="dropdown-img">
-                    <h1 class="user-info">User Name</h1>
+                    <h1 class="user-info">Guest User</h1>
                 </div>
                 <a href="#" class="sub-menu-link">
                     <p>My Profile</p>
@@ -52,7 +58,7 @@
                         <p>HELP</p>
                         <span></span>
                     </a>
-                    <a href="#" class="sub-menu-link" id="sign-out-link">
+                    <a href="/login" class="sub-menu-link" id="sign-out-link">
                         <p>SIGN OUT</p>
                         <span></span>
                     </a>
@@ -68,267 +74,165 @@
         <img src="./img/display.png" alt="Background Cars">
     </div>
 
-    <!-- 1 Chevrolet Trailblazer SUV -->
     <div class="vehicles">
         <div class="vehicle-card">
             <img alt="Chevrolet Trailblazer" height="150" src="/img/Chevrolet Trailblazer SUV.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Chevrolet Trailblazer
-                </h3>
-                <p class="price">
-                    ₱4800.00
-                </p>
+                <h3>Chevrolet Trailblazer</h3>
+                <p class="price">₱4800.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    SUV
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>SUV</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal for versatile
-                use.
+                The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal for versatile use.
             </p>
-            <button
-                onclick="openModal('Chevrolet Trailblazer', 'SUV', 'The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal for versatile use.', '/img/Chevrolet Trailblazer SUV.png', '₱4800.00')">
+            <button onclick="openModal('Chevrolet Trailblazer', 'SUV', 'The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal for versatile use.', '/img/Chevrolet Trailblazer SUV.png', '₱4800.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 2 Ford Ranger Pickup -->
         <div class="vehicle-card">
             <img alt="Ford Ranger" height="150" src="/img/Ford Ranger PickUp.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Ford Ranger
-                </h3>
-                <p class="price">
-                    ₱4500.00
-                </p>
+                <h3>Ford Ranger</h3>
+                <p class="price">₱4500.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    Pick Up
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>Pick Up</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance, spacious
-                cabin,
-                and off-road capabilities, ideal for both work and adventure.
+                The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance, spacious cabin, and off-road capabilities, ideal for both work and adventure.
             </p>
-            <button
-                onclick="openModal('Ford Ranger', 'Pick Up', 'The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance, spacious cabin, and off-road capabilities, ideal for both work and adventure.', '/img/Ford Ranger PickUp.png', '₱4500.00')">
+            <button onclick="openModal('Ford Ranger', 'Pick Up', 'The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance, spacious cabin, and off-road capabilities, ideal for both work and adventure.', '/img/Ford Ranger PickUp.png', '₱4500.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 3 Honda Civic Sedan -->
         <div class="vehicle-card">
             <img alt="Honda Civic" height="150" src="/img/Honda Civic Sedan.jpg" width="300" />
             <div class="title-price">
-                <h3>
-                    Honda Civic
-                </h3>
-                <p class="price">
-                    ₱2800.00
-                </p>
+                <h3>Honda Civic</h3>
+                <p class="price">₱2800.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    Sedan
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>Sedan</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable interior,
-                smooth ride, and advanced safety features, perfect for daily commuting and city driving.
+                The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable interior, smooth ride, and advanced safety features, perfect for daily commuting and city driving.
             </p>
-            <button
-                onclick="openModal('Honda Civic', 'Sedan', 'The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable interior, smooth ride, and advanced safety features, perfect for daily commuting and city driving.', '/img/Honda Civic Sedan.jpg', '₱2800.00')">
+            <button onclick="openModal('Honda Civic', 'Sedan', 'The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable interior, smooth ride, and advanced safety features, perfect for daily commuting and city driving.', '/img/Honda Civic Sedan.jpg', '₱2800.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 4 Hyundai Accent Sedan -->
         <div class="vehicle-card">
             <img alt="Hyundai Accent" height="150" src="/img/Hyundai Accent Sedan.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Hyundai Accent
-                </h3>
-                <p class="price">
-                    ₱2200.00
-                </p>
+                <h3>Hyundai Accent</h3>
+                <p class="price">₱2200.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    Sedan
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>Sedan</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious interior and
-                advanced safety features,
-                making it the perfect choice for both city commutes and weekend getaways.
+                The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious interior and advanced safety features, making it the perfect choice for both city commutes and weekend getaways.
             </p>
-            <button
-                onclick="openModal('Hyundai Accent', 'Sedan', 'The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious interior and advanced safety features, making it the perfect choice for both city commutes and weekend getaways.', '/img/Hyundai Accent Sedan.png', '₱2200.00')">
+            <button onclick="openModal('Hyundai Accent', 'Sedan', 'The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious interior and advanced safety features, making it the perfect choice for both city commutes and weekend getaways.', '/img/Hyundai Accent Sedan.png', '₱2200.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 5 Kia Sorento SUV -->
         <div class="vehicle-card">
             <img alt="Kia Sorento" height="150" src="/img/Kia Sorento SUV.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Kia Sorento
-                </h3>
-                <p class="price">
-                    ₱4200.00
-                </p>
+                <h3>Kia Sorento</h3>
+                <p class="price">₱4200.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    SUV
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>SUV</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Kia Sorento SUV combines a spacious interior, flexible seating, and advanced technology, offering
-                comfort, convenience,
-                and versatility for family trips, daily errands, and weekend getaways.
+                The Kia Sorento SUV combines a spacious interior, flexible seating, and advanced technology, offering comfort, convenience, and versatility for family trips, daily errands, and weekend getaways.
             </p>
-            <button
-                onclick="openModal('Kia Sorento', 'SUV', 'The Kia SorentoUV combines a spacious interior, flexible seating, and advanced technology, offering comfort, convenience, and versatility for family trips, daily errands, and weekend getaways.', '/img/Kia Sorento SUV.png', '₱4200.00')">
+            <button onclick="openModal('Kia Sorento', 'SUV', 'The Kia Sorento SUV combines a spacious interior, flexible seating, and advanced technology, offering comfort, convenience, and versatility for family trips, daily errands, and weekend getaways.', '/img/Kia Sorento SUV.png', '₱4200.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 6 Mitsubishi Montero SUV -->
         <div class="vehicle-card">
             <img alt="Mitsubishi Montero" height="150" src="/img/Mitsubishi Montero SUV.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Mitsubishi Montero
-                </h3>
-                <p class="price">
-                    ₱4000.00
-                </p>
+                <h3>Mitsubishi Montero</h3>
+                <p class="price">₱4000.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    SUV
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>SUV</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Mitsubishi Montero SUV is offering ample space, off-road capability, and advanced features for all
-                your adventures.
+                The Mitsubishi Montero SUV is offering ample space, off-road capability, and advanced features for all your adventures.
             </p>
-            <button
-                onclick="openModal('Mitsubishi Montero', 'SUV', 'The Mitsubishi MonteroUV is a rugged and reliable vehicle, offering ample space, off-road capability, and advanced features for all your adventures.', '/img/Mitsubishi Montero SUV.png', '₱4000.00')">
+            <button onclick="openModal('Mitsubishi Montero', 'SUV', 'The Mitsubishi Montero SUV is a rugged and reliable vehicle, offering ample space, off-road capability, and advanced features for all your adventures.', '/img/Mitsubishi Montero SUV.png', '₱4000.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 7 Nissan Navara Pickup -->
         <div class="vehicle-card">
             <img alt="Nissan Navara" height="150" src="/img/Nissan Navara Pickup.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Nissan Navara
-                </h3>
-                <p class="price">
-                    ₱4300.00
-                </p>
+                <h3>Nissan Navara</h3>
+                <p class="price">₱4300.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    Pick Up
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>Pick Up</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Nissan Navara Pickup is a durable and versatile truck, designed for both work and play,
-                with robust towing capacity and a comfortable interior.
+                The Nissan Navara Pickup is a durable and versatile truck, designed for both work and play, with robust towing capacity and a comfortable interior.
             </p>
-            <button
-                onclick="openModal('Nissan Navara', 'Pick Up', 'The Nissan Navara Pickup is a durable and versatile truck, designed for both work and play, with robust towing capacity and a comfortable interior.', '/img/Nissan Navara Pickup.png', '₱4300.00')">
+            <button onclick="openModal('Nissan Navara', 'Pick Up', 'The Nissan Navara Pickup is a durable and versatile truck, designed for both work and play, with robust towing capacity and a comfortable interior.', '/img/Nissan Navara Pickup.png', '₱4300.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 8 Suzuki Ertiga MPV -->
         <div class="vehicle-card">
             <img alt="Suzuki Ertiga" height="150" src="/img/Suzuki Ertiga MPV.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Suzuki Ertiga
-                </h3>
-                <p class="price">
-                    ₱3000.00
-                </p>
+                <h3>Suzuki Ertiga</h3>
+                <p class="price">₱3000.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    MPV
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>MPV</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options, making it
-                perfect for everyday use and road trips.
+                The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options, making it perfect for everyday use and road trips.
             </p>
-            <button
-                onclick="openModal('Suzuki Ertiga', 'MPV', 'The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options, making it perfect for everyday use and road trips.', '/img/Suzuki Ertiga MPV.png', '₱3000.00')">
+            <button onclick="openModal('Suzuki Ertiga', 'MPV', 'The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options, making it perfect for everyday use and road trips.', '/img/Suzuki Ertiga MPV.png', '₱3000.00')">
                 View Details
             </button>
         </div>
 
-        <!-- 9 Toyota Corolla Sedan -->
         <div class="vehicle-card">
             <img alt="Toyota Corolla" height="150" src="/img/Toyota Corolla Sedan.png" width="300" />
             <div class="title-price">
-                <h3>
-                    Toyota Corolla
-                </h3>
-                <p class="price">
-                    ₱2500.00
-                </p>
+                <h3>Toyota Corolla</h3>
+                <p class="price">₱2500.00</p>
             </div>
             <div class="type-car">
-                <p>
-                    Sedan
-                </p>
-                <p class="perday">
-                    per day
-                </p>
+                <p>Sedan</p>
+                <p class="perday">per day</p>
             </div>
             <p class="description">
-                The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety features, ideal for
-                city driving and long trips.
+                The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety features, ideal for city driving and long trips.
             </p>
-            <button
-                onclick="openModal('Toyota Corolla', 'Sedan', 'The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety features, ideal for city driving and long trips.', '/img/Toyota Corolla Sedan.png', '₱2500.00')">
+            <button onclick="openModal('Toyota Corolla', 'Sedan', 'The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety features, ideal for city driving and long trips.', '/img/Toyota Corolla Sedan.png', '₱2500.00')">
                 View Details
             </button>
         </div>
@@ -338,12 +242,10 @@
         Copyright © 2024 - Wander Wheels. All Rights Reserved.
     </footer>
 
-    <!-- The Modal -->
     <div class="modal" id="myModal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" src="" alt="Car Image"
-                style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
+            <img id="modalImage" src="" alt="Car Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px;">
             <h2 id="modalTitle"></h2>
             <p id="modalType"></p>
             <p class="price" id="modalPrice"></p>
@@ -358,80 +260,47 @@
                 const submenu = document.getElementById("profile-dropdown");
                 submenu.classList.toggle("open-menu");
             };
-            document.querySelector('.dropdown-icon').addEventListener('click', toggleMenu);
-            fetchUserInfo();
-        });
+            const dropdownIcon = document.querySelector('.dropdown-icon');
+            if (dropdownIcon) {
+                dropdownIcon.addEventListener('click', toggleMenu);
+            }
 
-        function fetchUserInfo() {
-            fetch('/api/userinfo')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
+            fetch('/api/auth-status')
+                .then(res => res.json())
                 .then(data => {
-                    console.log('User Info:', data);
-                    const userInfoElement = document.querySelector('.user-info');
-                    if (userInfoElement) {
-                        userInfoElement.textContent = `${data.firstName} ${data.lastName}`.trim();
+                    const buttonsContainer = document.getElementById('buttons-container');
+                    const profileContainer = document.getElementById('profile-container');
+
+                    if (data.isLoggedIn) {
+                        if (profileContainer) profileContainer.style.display = 'block';
+                        if (buttonsContainer) buttonsContainer.style.display = 'none';
+                        const userInfo = document.querySelector('.user-info');
+                        if (userInfo) userInfo.textContent = data.userName;
                     } else {
-                        console.error('User info element not found');
-                        alert('User info element not found');
-                    }
-                    const fnameInput = document.getElementById('fname');
-                    const lnameInput = document.getElementById('lname');
-                    const emailInput = document.getElementById('email');
-
-                    if (fnameInput) {
-                        fnameInput.value = data.firstName || '';
-                    } else {
-                        console.warn('First name input not found');
-                    }
-
-                    if (lnameInput) {
-                        lnameInput.value = data.lastName || '';
-                    } else {
-                        console.warn('Last name input not found');
-                    }
-
-                    if (emailInput) {
-                        emailInput.value = data.email || '';
-                    } else {
-                        console.warn('Email input not found');
-                    }
-
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                    alert('Failed to fetch user info. Please try again.');
-                });
-        }
-
-        window.onload = fetchUserInfo;
-
-        document.getElementById('sign-out-link').addEventListener('click', function (event) {
-            event.preventDefault();
-
-            fetch('/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Logout successful. Redirecting to login.html...');
-                        window.location.href = '/login';
-                    } else {
-                        console.error('Logout failed');
-                        alert('Logout failed. Please try again.');
+                        if (buttonsContainer) buttonsContainer.style.display = 'flex';
+                        if (profileContainer) profileContainer.style.display = 'none';
                     }
                 })
-                .catch(error => {
-                    console.error('Error during logout:', error);
-                    alert('Error during logout. Please try again.');
+                .catch(err => console.error('Error fetching auth status:', err));
+
+            const signOutLink = document.getElementById('sign-out-link');
+            if (signOutLink) {
+                signOutLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    fetch('/logout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/login';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error during logout:', error);
+                    });
                 });
+            }
         });
 
         function openModal(title, type, description, image, price) {
@@ -446,6 +315,7 @@
         function bookCar() {
             alert("Booking functionality is not implemented yet.");
         }
+
         function closeModal() {
             document.getElementById('myModal').style.display = "none";
         }
