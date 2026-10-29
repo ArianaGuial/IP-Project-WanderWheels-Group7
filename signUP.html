@@ -5,30 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/signUP.css?v=1.0">
     <title>Create Account</title>
+    <link rel="stylesheet" href="/assets/auth-form.css">
+    <script src="/assets/auth-form.js" defer></script>
 </head>
 <body>
     <div class="up">
         <img src="./img/logo.png" alt="Logo" class="logo">
         <h1>Wander Wheels</h1>
     </div>
+
     <div class="bg"></div>
-    <img src="/img/orangeCar.png" alt="Car Desgin" class="orange-car">
+    <img src="/img/orangeCar.png" alt="Car illustration" class="orange-car">
+
     <div class="form">
         <div class="title">
             <p>Create An Account</p>
         </div>
-        <form action="/home" method="GET">
+
+        <form id="auth-form" action="/signup" method="POST">
             <div class="name-fields">
-                <input type="text" name="fname" placeholder="First Name" required>
-                <input type="text" name="lname" placeholder="Last Name" required>
+                <label class="auth-label" for="fname">First name</label>
+                <input id="fname" type="text" name="fname" placeholder="First Name" autocomplete="given-name" required maxlength="80">
+
+                <label class="auth-label" for="lname">Last name</label>
+                <input id="lname" type="text" name="lname" placeholder="Last Name" autocomplete="family-name" required maxlength="80">
             </div>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="pass" placeholder="Password" required>
-            <input type="password" name="confirm" placeholder="Confirm Password" required>
+
+            <label class="auth-label" for="email">Email address</label>
+            <input id="email" type="email" name="email" placeholder="Email" autocomplete="email" required maxlength="254">
+
+            <label class="auth-label" for="pass">Password</label>
+            <input id="pass" type="password" name="pass" placeholder="Password" autocomplete="new-password" required maxlength="128" minlength="8">
+
+            <label class="auth-label" for="confirm">Confirm password</label>
+            <input id="confirm" type="password" name="confirm" placeholder="Confirm Password" autocomplete="new-password" required maxlength="128" minlength="8">
+
             <input type="submit" value="Sign Up" name="signUp_button">
+
+            <p class="auth-status" id="auth-status" role="status" aria-live="polite" tabindex="-1"></p>
         </form>
+
         <p class="account-link">Already have account? <a href='/login'>Sign in</a></p>
     </div>
+
     <footer>Copyright © 2024 - Wander Wheels. All Rights Reserved.</footer>
 </body>
 </html>

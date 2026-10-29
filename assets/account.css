@@ -1,0 +1,96 @@
+﻿/* Shared signed-in profile, aligned to the top right of the header. */
+.header > [hidden],
+.site-header > [hidden] {
+  display: none !important;
+}
+
+.account-profile {
+  position: relative;
+  flex-shrink: 0;
+  max-width: 280px;
+  margin-left: auto;
+  color: #1e1e1e;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  z-index: 20;
+}
+
+.account-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.account-summary::-webkit-details-marker {
+  display: none;
+}
+
+.account-summary img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.account-summary span:first-of-type {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.account-summary:hover,
+.account-profile[open] .account-summary {
+  background-color: #fff5e5;
+}
+
+.account-summary:focus-visible,
+.account-signout:focus-visible {
+  outline: 2px solid #9a5700;
+  outline-offset: 3px;
+}
+
+.account-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(280px, calc(100vw - 48px));
+  padding: 20px;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px #0000001a;
+}
+
+.account-panel p {
+  margin: 8px 0 16px;
+  overflow-wrap: anywhere;
+  color: #626262;
+  font-size: 13px;
+}
+
+.account-signout {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #ff9d0b;
+  border-radius: 8px;
+  background-color: #ff9d0b;
+  color: #1e1e1e;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.account-signout:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.account-panel .account-status:empty {
+  display: none;
+}

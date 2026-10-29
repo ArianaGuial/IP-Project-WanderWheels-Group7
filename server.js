@@ -2,22 +2,39 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { randomBytes } = require('crypto');
+const mysql = require('mysql2/promise');
+const { registerAuthRoutes } = require('./lib/auth');
+
+if (require('fs').existsSync(path.join(__dirname, '.env'))) {
+  process.loadEnvFile(path.join(__dirname, '.env'));
+}
+
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || '127.0.0.1',
+  port: Number(process.env.DB_PORT || 3306),
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '1234',
+  database: process.env.DB_NAME || 'wander_wheels',
+  waitForConnections: true,
+  connectionLimit: 10
+});
 
 const app = express();
-const port = 4501;
+const port = Number(process.env.PORT || 4501);
 
 app.use('/assets', express.static('assets'));
 app.use('/img', express.static('img'));
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.use(session({
-  secret: 'IMProject2024',
+  secret: process.env.SESSION_SECRET || randomBytes(32).toString('hex'),
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
+  saveUninitialized: false,
+  cookie: { httpOnly: true, sameSite: 'lax', secure: false, maxAge: 8 * 60 * 60 * 1000 }
 }));
 
 app.get("/", function(req, res) {
@@ -33,46 +50,31 @@ app.get("/vehicles", (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/login.html'); 
+  res.sendFile(__dirname + '/login.html');
 });
 
 app.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "/signUP.html"));
 });
 
-app.post("/login", (req, res) => {
-  req.session.isAuthenticated = true;
-  req.session.userId = 1;
-  res.redirect("/home");
-});
-
-app.post("/signup", (req, res) => {
-  req.session.isAuthenticated = true;
-  req.session.userId = 1;
-  res.redirect("/home");
-});
-
-app.post('/logout', (req, res) => {
-  req.session.destroy(err => {
-      if (err) {
-          return res.status(500).send('Could not log out');
-      }
-      res.status(200).json({ message: 'Logout successful' });
-  });
-});
-
-app.get('/api/auth-status', (req, res) => {
-    if (req.session.isAuthenticated) {
-        res.json({ isLoggedIn: true, userName: "User" });
-    } else {
-        res.json({ isLoggedIn: false, userName: "Guest User" });
-    }
-});
+registerAuthRoutes(app, pool);
 
 app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "AboutUS.html"));
+  res.sendFile(path.join(__dirname, "about.html"));
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.get("/team", (req, res) => {
+  res.sendFile(path.join(__dirname, "team.html"));
 });
+
+app.get("/contact", (req, res) => {
+  res.sendFile(path.join(__dirname, "contact.html"));
+});
+
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+}
+
+module.exports = { app, pool };

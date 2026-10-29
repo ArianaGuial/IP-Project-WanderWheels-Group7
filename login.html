@@ -5,25 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/login.css?v=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="/assets/auth-form.css">
+    <script src="/assets/auth-form.js" defer></script>
 </head>
 <body>
     <div class="up">
         <img src="./img/logo.png" alt="Logo" class="logo">
         <h1>Wander Wheels</h1>
     </div>
+
     <div class="bg"></div>
-    <img src="/img/orangeCar.png" alt="Car Desgin" class="orange-car">
+    <img src="/img/orangeCar.png" alt="Car illustration" class="orange-car">
+
     <div class="form">
         <div class="title">
             <p>Login Now</p>
         </div>
-        <form action="/home" method="GET">
-            <input type="text" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Password">
+
+        <form id="auth-form" action="/login" method="POST">
+            <label class="auth-label" for="email">Email address</label>
+            <input id="email" type="email" name="email" placeholder="Email" autocomplete="email" required maxlength="254">
+
+            <label class="auth-label" for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Password" autocomplete="current-password" required maxlength="128">
+
             <input type="submit" value="Login" name="login_button">
+
+            <p class="auth-status" id="auth-status" role="status" aria-live="polite" tabindex="-1"></p>
         </form>
+
         <p class="account-link">Not a member? <a href='/signup'>Sign Up Now!</a></p>
     </div>
+
     <footer>Copyright © 2026 - Wander Wheels. All Rights Reserved.</footer>
 </body>
 </html>

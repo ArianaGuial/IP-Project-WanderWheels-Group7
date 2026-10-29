@@ -5,16 +5,22 @@
     <meta charset="utf-8" />
     <title>Vehicles</title>
     <link rel="stylesheet" href="/assets/vehiclesUSER.css">
-</head>
+    <link rel="stylesheet" href="/assets/navigation.css" />
+    <link rel="stylesheet" href="/assets/account.css">
+    <script src="/assets/company.js" defer></script>
+  </head>
 
 <body>
     <header class="header">
         <img src="./img/logo.png" alt="Logo" class="logo">
         <h1>Wander Wheels</h1>
-        <nav>
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="/home">Home</a></li>
-                <li><a href="/vehicles" class="active">Vehicles</a></li>
+                <li><a href="/vehicles" class="active" aria-current="page">Vehicles</a></li>
+                  <li><a href="/about">About Us</a></li>
+                  <li><a href="/team">Our Team</a></li>
+                  <li><a href="/contact">Contact Us</a></li>
             </ul>
         </nav>
 
@@ -26,47 +32,8 @@
                 <button type="submit" class="signup-btn">Sign Up</button>
             </form>
         </div>
-
-        <div class="profile-menu" id="profile-container" style="display: none;">
-            <div class="profile-name" id="profile-menu">
-                <img src="/img/profile1-1-2.png" alt="User Profile" class="user-pic" id="user-pic">
-                <span class="dropdown-icon"><img class="dropdown-icon" src="img/Arrow (Down).svg" /></span>
-            </div>
-
-            <div class="profile-dropdown" id="profile-dropdown">
-                <div class="profile-name">
-                    <img src="/img/profile1-1-2.png" class="dropdown-img">
-                    <h1 class="user-info">Guest User</h1>
-                </div>
-                <a href="#" class="sub-menu-link">
-                    <p>My Profile</p>
-                    <span></span>
-                </a>
-                <hr>
-                <a href="#" class="sub-menu-link">
-                    <p>Settings</p>
-                    <span></span>
-                </a>
-                <hr>
-                <a href="#" class="sub-menu-link">
-                    <p>History</p>
-                    <span></span>
-                </a>
-                <hr>
-                <div class="help-signout-container">
-                    <a href="#" class="sub-menu-link">
-                        <p>HELP</p>
-                        <span></span>
-                    </a>
-                    <a href="/login" class="sub-menu-link" id="sign-out-link">
-                        <p>SIGN OUT</p>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-        </div>
     </header>
-    
+
     <div class="title">
         <h1>VEHICLES</h1>
     </div>
@@ -255,54 +222,6 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toggleMenu = () => {
-                const submenu = document.getElementById("profile-dropdown");
-                submenu.classList.toggle("open-menu");
-            };
-            const dropdownIcon = document.querySelector('.dropdown-icon');
-            if (dropdownIcon) {
-                dropdownIcon.addEventListener('click', toggleMenu);
-            }
-
-            fetch('/api/auth-status')
-                .then(res => res.json())
-                .then(data => {
-                    const buttonsContainer = document.getElementById('buttons-container');
-                    const profileContainer = document.getElementById('profile-container');
-
-                    if (data.isLoggedIn) {
-                        if (profileContainer) profileContainer.style.display = 'block';
-                        if (buttonsContainer) buttonsContainer.style.display = 'none';
-                        const userInfo = document.querySelector('.user-info');
-                        if (userInfo) userInfo.textContent = data.userName;
-                    } else {
-                        if (buttonsContainer) buttonsContainer.style.display = 'flex';
-                        if (profileContainer) profileContainer.style.display = 'none';
-                    }
-                })
-                .catch(err => console.error('Error fetching auth status:', err));
-
-            const signOutLink = document.getElementById('sign-out-link');
-            if (signOutLink) {
-                signOutLink.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    fetch('/logout', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' }
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            window.location.href = '/login';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error during logout:', error);
-                    });
-                });
-            }
-        });
-
         function openModal(title, type, description, image, price) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalType').innerText = type;
