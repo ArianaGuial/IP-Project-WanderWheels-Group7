@@ -1,0 +1,129 @@
+﻿/* Shared navigation for Home, Vehicles, About Us, Our Team, and Contact Us. */
+.header nav,
+.site-header nav {
+  position: static;
+  transform: none;
+  margin: 0 auto;
+}
+
+.header nav ul,
+.site-header nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header nav li,
+.site-header nav li {
+  margin: 0;
+}
+
+.header nav a,
+.site-header nav a {
+  position: relative;
+  display: inline-block;
+  padding: 12px 0;
+  color: #1e1e1e;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.header nav a::after,
+.site-header nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #ff9d0b;
+  content: '';
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 180ms ease;
+}
+
+.header nav a:hover,
+.header nav a:focus-visible,
+.header nav a.active,
+.header nav a[aria-current="page"],
+.site-header nav a:hover,
+.site-header nav a:focus-visible,
+.site-header nav a.active,
+.site-header nav a[aria-current="page"] {
+  color: #9a5700;
+}
+
+.header nav a:hover::after,
+.header nav a:focus-visible::after,
+.header nav a.active::after,
+.header nav a[aria-current="page"]::after,
+.site-header nav a:hover::after,
+.site-header nav a:focus-visible::after,
+.site-header nav a.active::after,
+.site-header nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.header nav a:focus-visible,
+.site-header nav a:focus-visible {
+  outline: 2px solid #9a5700;
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
+/* Keep the expanded five-link menu clear of the brand and account actions. */
+@media (max-width: 1280px) {
+  .header,
+  .site-header {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .header nav,
+  .site-header nav {
+    order: 3;
+    width: 100%;
+  }
+
+  .header > .buttons {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .header nav,
+  .site-header nav {
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .header nav ul,
+  .site-header nav ul {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .header nav a,
+  .site-header nav a {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header nav a,
+  .header nav a::after,
+  .site-header nav a,
+  .site-header nav a::after {
+    transition: none;
+  }
+}

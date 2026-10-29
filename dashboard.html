@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/dashboard.css?v=1.0" />
+    <link rel="stylesheet" href="/assets/navigation.css" />
+      <link rel="stylesheet" href="/assets/account.css">
+    <script src="/assets/company.js" defer></script>
   </head>
   <body>
     <div class="home-page">
@@ -126,8 +129,8 @@
               <div class="links">
                 <div class="text-wrapper-6">Company</div>
                 <div class="frame-3">
-                  <!-- <div class="text-wrapper-8">About Us</div> -->
-                  <!-- <div class="text-wrapper-7">Contact Us</div> -->
+                  <!-- <a class="text-wrapper-8" href="/about">About Us</a> -->
+                  <!-- <a class="text-wrapper-7" href="/contact">Contact Us</a><a class="text-wrapper-7" href="/team">Our Team</a> -->
                   <!-- <div class="text-wrapper-7">Our Team</div> -->
                 </div>
               </div>
@@ -159,14 +162,13 @@
         <header class="header">
           <img src="./img/logo.png" alt="Logo" class="logo">
           <h1>Wander Wheels</h1>
-          <nav>
+          <nav aria-label="Main navigation">
               <ul>
-                  <li><a href="/home" class="active">Home</a></li>
+                  <li><a href="/home" class="active" aria-current="page">Home</a></li>
                   <li><a href="/vehicles">Vehicles</a></li>
-                  <!-- <li><a href="/team">Our Team</a></li> -->
-                  <!-- <li><a href="/about">About Us</a></li> -->
-                  <!-- <li><a href="/contact">Contact Us</a></li> -->
-              </ul>
+                  <li><a href="/about">About Us</a></li>
+                  <li><a href="/team">Our Team</a></li>
+                  <li><a href="/contact">Contact Us</a></li>              </ul>
           </nav>
           <div class="buttons">
             <form action="/login" method="GET">
@@ -175,7 +177,7 @@
             <form action="/signup" method="GET">
                 <button type="submit" class="signup-btn">Sign Up</button>
             </form>
-          </div>        
+          </div>
       </header> <hr class="line">
         <div class="booking-form">
           <div class="overlap">
@@ -213,7 +215,7 @@
                           <option value="coupe">Nissan Altima</option>
                           <option value="pickup">Chevrolet Malibu</option>
                         </select>
-                      </div>                      
+                      </div>
                       <div class="div-3">
                         <select id="rental-place" class="dropdown">
                           <option value="" disabled selected>Select a place of rental</option>
@@ -223,7 +225,7 @@
                         </select>
                       </div>
                       <div class="div-3">
-                        
+
                         <select id="return-place" class="dropdown">
                           <option value="" disabled selected>Select a place of return</option>
                           <option value="cebu">Cebu City</option>
@@ -231,7 +233,7 @@
                           <option value="mandaue">Mandaue City</option>
                         </select>
                       </div>
-                      
+
                       <div class="input">
                         <div class="content">
                           <div class="placeholder">Rental date</div>
