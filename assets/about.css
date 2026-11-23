@@ -9,7 +9,7 @@
 
 .values {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   padding-top: 0;
 }
@@ -51,7 +51,7 @@
 }
 
 .story-art {
-  background: var(--orange) url('/img/background3-design.png') center/cover;
+  background: var(--orange) url("/img/background3-design.png") center/cover;
   border-radius: 26px;
   min-height: 390px;
   display: flex;
@@ -73,7 +73,6 @@
   font-weight: 700;
   line-height: 1.15;
 }
-
 
 @media (max-width: 1150px) {
   .story {

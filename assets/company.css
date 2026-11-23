@@ -1,6 +1,6 @@
 /* Shared company-page layout, typography, and components */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&family=Yusei+Magic&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&family=Yusei+Magic&display=swap");
 
 :root {
   --orange: #ff9d0b;
@@ -17,7 +17,7 @@
 body {
   margin: 0;
   color: var(--ink);
-  font-family: 'Work Sans',Arial,sans-serif;
+  font-family: "Work Sans", Arial, sans-serif;
   line-height: 1.65;
 }
 
@@ -52,13 +52,13 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(36px,5vw,56px);
+  font-size: clamp(36px, 5vw, 56px);
   margin-bottom: 16px;
 }
 
 h2 {
-  font-size: clamp(26px,3vw,36px);
-  letter-spacing: -.7px;
+  font-size: clamp(26px, 3vw, 36px);
+  letter-spacing: -0.7px;
   margin-bottom: 20px;
 }
 
@@ -75,7 +75,9 @@ button,
 input,
 textarea,
 select {
-  transition: background-color .15s,border-color .15s;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
 }
 
 a:focus-visible,
@@ -102,7 +104,7 @@ select:focus-visible {
 
 .site-header {
   min-height: 104px;
-  padding: 20px max(24px,calc((100vw - 1240px)/2));
+  padding: 20px max(24px, calc((100vw - 1240px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -114,7 +116,7 @@ select:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Yusei Magic',Arial,sans-serif;
+  font-family: "Yusei Magic", Arial, sans-serif;
   font-size: 26px;
   white-space: nowrap;
 }
@@ -138,7 +140,10 @@ select:focus-visible {
   border: 1px solid var(--orange);
   border-radius: 10px;
   padding: 12px 22px;
-  font: 600 15px/1.5 Inter,Arial,sans-serif;
+  font:
+    600 15px/1.5 Inter,
+    Arial,
+    sans-serif;
   color: var(--ink);
   cursor: pointer;
   white-space: nowrap;
@@ -180,7 +185,10 @@ select:focus-visible {
 }
 
 .eyebrow {
-  font: 600 12px/1.6 Inter,Arial,sans-serif;
+  font:
+    600 12px/1.6 Inter,
+    Arial,
+    sans-serif;
   letter-spacing: 2px;
   color: #915200;
   margin-bottom: 14px;
@@ -225,12 +233,12 @@ select:focus-visible {
 
 .site-footer {
   border-top: 1px solid var(--line);
-  padding: 44px max(24px,calc((100vw - 1192px)/2)) 0;
+  padding: 44px max(24px, calc((100vw - 1192px) / 2)) 0;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1.1fr .75fr .65fr;
+  grid-template-columns: 1.6fr 1.1fr 0.75fr 0.65fr;
   gap: 42px;
 }
 
@@ -249,7 +257,7 @@ select:focus-visible {
   margin: 14px 0 20px;
 }
 
-.footer-grid>div>a:not(.brand) {
+.footer-grid > div > a:not(.brand) {
   display: block;
   color: var(--muted);
   font-size: 14px;
@@ -323,7 +331,7 @@ select:focus-visible {
     gap: 24px;
   }
 
-  .footer-grid>div:first-child {
+  .footer-grid > div:first-child {
     grid-column: 1/-1;
   }
 }

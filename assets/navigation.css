@@ -28,7 +28,7 @@
   display: inline-block;
   padding: 12px 0;
   color: #1e1e1e;
-  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.5;
@@ -45,7 +45,7 @@
   left: 0;
   height: 2px;
   background-color: #ff9d0b;
-  content: '';
+  content: "";
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 180ms ease;

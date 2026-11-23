@@ -1,13 +1,16 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Work+Sans:400,700,600|Inter:400,500,700,600|Urbanist:400,900,600,italic");
-@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:400,700,600|Inter:400,500,700,600|Urbanist:400,900,600,italic");
+
+@import url("https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap");
 
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-html, body {
+
+html,
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,9 +20,11 @@ button:focus-visible {
   outline: 2px solid #4a90e2 !important;
   outline: -webkit-focus-ring-color auto 5px !important;
 }
+
 a {
   text-decoration: none;
 }
+
 @font-face {
   font-family: "Font Awesome 6 Free-Solid";
   src: url("https://anima-uploads.s3.amazonaws.com/projects/6339b9b6cff130481da234b3/fonts/font-awesome-6-free-regular-400.otf")
@@ -47,16 +52,16 @@ a {
 }
 
 .line {
-  border: none; 
-  height: 2px; 
-  background-color: #00000040; 
-  margin: 3px 0; 
-  width: 100%; 
+  border: none;
+  height: 2px;
+  background-color: #00000040;
+  margin: 3px 0;
+  width: 100%;
   margin-left: 0;
-  box-shadow: 0px 2px 4px #00000040; 
+  box-shadow: 0px 2px 4px #00000040;
 }
 
-.header nav{
+.header nav {
   margin: 0 auto;
 }
 
@@ -74,7 +79,7 @@ a {
 .header a {
   text-decoration: none;
   color: black;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .user-pic {
@@ -96,10 +101,10 @@ a {
 }
 
 .profile-dropdown {
-  display: none; 
+  display: none;
   position: absolute;
-  top: 60px; 
-  right: 0; 
+  top: 60px;
+  right: 0;
   background-color: white;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
   z-index: 1;
@@ -141,13 +146,13 @@ a {
 .dropdown-icon {
   margin-bottom: 10%;
   align-items: center;
-  width: 12px; 
+  width: 12px;
   height: 12px;
-} 
+}
 
 .help-signout-container {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   gap: 30%;
 }
 
@@ -163,18 +168,18 @@ a {
 
 .buttons {
   position: absolute;
-  top: 3px; 
+  top: 3px;
   display: flex;
   gap: 30px;
 }
 
 .buttons form {
-  margin: 0; 
+  margin: 0;
 }
 
 .login-btn {
   background-color: white;
-  font-family: "Yusei Magic", sans-serif; 
+  font-family: "Yusei Magic", sans-serif;
   color: black;
   padding: 10px 20px;
   border: 2px solid #ff9d0b;
@@ -184,7 +189,7 @@ a {
 }
 
 .signup-btn {
-  background-color: orange; 
+  background-color: orange;
   font-family: "Yusei Magic", sans-serif;
   color: white;
   padding: 10px 20px;
@@ -194,7 +199,8 @@ a {
   font-size: 14px;
 }
 
-.login-btn:hover, .signup-btn:hover {
+.login-btn:hover,
+.signup-btn:hover {
   opacity: 0.8;
 }
 
@@ -832,7 +838,6 @@ a {
   left: 68px;
 }
 
-
 .home-page .overlap {
   position: relative;
   height: 660px;
@@ -933,17 +938,17 @@ a {
   white-space: nowrap;
   background-color: #ffffff;
   border: 2px solid #ff9d0b;
-  border-radius: 12px; 
+  border-radius: 12px;
   font-family: "Work Sans", Helvetica;
   font-weight: 600;
-  font-size: 16px; 
+  font-size: 16px;
   color: #000;
   padding: 10px 20px;
   cursor: pointer;
   display: block;
   margin-top: 20px;
   margin-left: 105px;
-  margin-right: auto; 
+  margin-right: auto;
 }
 
 .home-page .text-wrapper-15 {
@@ -1051,7 +1056,7 @@ a {
   width: 100%;
   appearance: none; /* Removes default dropdown arrow */
   background-color: white;
-  background-image: url('img/chevron-bottom-normal-10.svg'); /* Custom arrow */
+  background-image: url("img/chevron-bottom-normal-10.svg"); /* Custom arrow */
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 15px;
@@ -1148,14 +1153,14 @@ a {
   left: 40px;
   background-color: #ff9d0b;
   border-radius: 12px;
-  height: 50px; 
+  height: 50px;
   justify-content: center;
   gap: 10px;
   padding: 13px 28px;
-  font-family: "Inter", Helvetica; 
-  font-size: 16px; 
-  font-weight: 600; 
-  color: var(--defaultwhite); 
+  font-family: "Inter", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--defaultwhite);
 }
 
 .home-page .button-4 {
@@ -1239,7 +1244,6 @@ a {
   white-space: nowrap;
   margin: 0;
 }
-
 
 .home-page .arrow-right {
   position: relative;
@@ -1411,7 +1415,6 @@ a {
   top: 214px;
   left: 42px;
 }
-
 
 :root {
   --defaultblack: rgba(0, 0, 0, 1);

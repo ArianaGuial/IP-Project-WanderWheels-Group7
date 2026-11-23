@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
+
 @import url("https://fonts.googleapis.com/css?family=Work+Sans:400,700,600|Inter:400,500,700,600|Urbanist:400,900,600,italic");
 
 * {
@@ -9,7 +11,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   max-width: 100vw;
   overflow-x: hidden;
   height: 100vh;
@@ -57,7 +59,7 @@ body {
 .header a {
   text-decoration: none;
   color: black;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .user-pic {
