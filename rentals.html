@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Rental Dashboard | Wander Wheels</title>
+		<link rel="stylesheet" href="/assets/rentals.css" />
+		<link rel="stylesheet" href="/assets/admin.css" />
+		<script src="/assets/rentals.js" defer></script>
+	</head>
+
+	<body>
+		<a href="#main" class="skip-link">Skip to content</a>
+		<div class="layout">
+			<aside>
+				<a class="brand" id="workspace-brand" href="/home">
+					<img src="/img/logo.png" width="36" height="36" alt="" />
+					<span>
+						<strong>Wander Wheels</strong>
+						<small id="workspace-role" hidden>Admin console</small>
+					</span>
+				</a>
+
+				<nav id="navigation" aria-label="Rental navigation"></nav>
+				<div class="session">
+					<span id="account-name"></span>
+					<button id="sign-out" type="button">Sign out</button>
+				</div>
+			</aside>
+
+			<main id="main" tabindex="-1">
+				<div id="notice" role="status" tabindex="-1"></div>
+				<div id="content" aria-live="polite">
+					<p>Loading your workspace…</p>
+				</div>
+			</main>
+		</div>
+
+		<dialog id="record-dialog" aria-labelledby="dialog-title">
+			<div class="dialog-top">
+				<h2 id="dialog-title"></h2>
+				<button type="button" id="close-dialog" aria-label="Close dialog">×</button>
+			</div>
+
+			<div id="dialog-body"></div>
+			<p id="dialog-status" role="status"></p>
+		</dialog>
+	</body>
+</html>
