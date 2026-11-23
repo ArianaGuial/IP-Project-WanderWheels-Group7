@@ -7,7 +7,7 @@
   align-items: start;
 }
 
-.contact-info>p {
+.contact-info > p {
   max-width: 400px;
 }
 
@@ -65,7 +65,7 @@ address {
   margin-bottom: 12px;
 }
 
-.contact-form>p {
+.contact-form > p {
   font-size: 14px;
 }
 
