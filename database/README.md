@@ -42,7 +42,8 @@ email and password to log back in. No additional SQL import is required.
 - The signed-in user's profile appears at the top right of every public page header.
   Open it to see the account email or sign out.
 - `/api/auth-status` reads the signed-in user's record from MySQL and excludes the password hash.
-- Guests can browse the fleet and submit a rental inquiry. Customers manage reservations in `/dashboard`.
+- Guests can browse the fleet and submit a rental inquiry. Sign-in sends customers to `/dashboard` and staff to `/manage`.
+- Hosted installations also need both SQL imports. Grant staff access in the database used by that deployment, since local staff accounts do not carry over.
 - Sessions currently live in Node's memory. Restarting Node signs users out; database
   accounts remain. A persistent session store and HTTPS cookie configuration can be
   added when deploying beyond local development.

@@ -18,6 +18,11 @@ if (authForm && formStatus) {
     }
 
     const submit = authForm.querySelector('[type="submit"]');
+    const isSignup = authForm.getAttribute("action") === "/signup";
+    const formData = Object.fromEntries(new FormData(authForm));
+    if (!isSignup && rentalDestination) {
+      formData.next = rentalDestination;
+    }
     submit.disabled = true;
     formStatus.textContent = "Please wait...";
 
@@ -25,16 +30,16 @@ if (authForm && formStatus) {
       const response = await fetch(authForm.action, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(Object.fromEntries(new FormData(authForm))),
+        body: JSON.stringify(formData),
       });
       const result = await response.json();
       if (!response.ok) {
         throw new Error(result.message || "Please try again.");
       }
       const destination =
-        result.redirect === "/account-setup" && rentalDestination
+        isSignup && rentalDestination
           ? "/account-setup?" + new URLSearchParams({ next: rentalDestination })
-          : rentalDestination || result.redirect;
+          : result.redirect;
       window.location.assign(destination);
     } catch (error) {
       formStatus.textContent = error.message || "Unable to connect. Please try again.";
