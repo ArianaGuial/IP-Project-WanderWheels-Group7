@@ -29,7 +29,15 @@ test("HTTP login, profile, signup, and logout with an injected database", async 
       email: "demo@wanderwheels.test",
       password_hash: await hashPassword("Wander123!"),
     },
+    {
+      id: 2,
+      first_name: "Demo",
+      last_name: "Admin",
+      email: "admin@example.test",
+      password_hash: await hashPassword("AdminPassword123!"),
+    },
   ];
+  const staffIds = new Set([2]);
   let unavailable = false;
   const pool = {
     async execute(sql, params) {
@@ -50,10 +58,13 @@ test("HTTP login, profile, signup, and logout with an injected database", async 
         users.push(user);
         return [{ insertId: user.id }];
       }
+      const matching = users.filter((user) =>
+        sql.includes("WHERE email") ? user.email === params[0] : user.id === params[0],
+      );
       return [
-        users.filter((user) =>
-          sql.includes("WHERE email") ? user.email === params[0] : user.id === params[0],
-        ),
+        sql.includes("FROM rental_staff")
+          ? matching.map((user) => ({ ...user, staff: Number(staffIds.has(user.id)) }))
+          : matching,
       ];
     },
   };
@@ -92,6 +103,19 @@ test("HTTP login, profile, signup, and logout with an injected database", async 
   assert.equal(valid.data.redirect, "/dashboard");
   assert.equal(valid.data.user.name, "Demo Traveler");
   assert.ok(cookie);
+  const customerLogin = { email: users[0].email, password: "Wander123!" };
+  assert.equal(
+    (await request("/login", { ...customerLogin, next: "/manage" })).data.redirect,
+    "/dashboard",
+  );
+  assert.equal(
+    (await request("/login", { ...customerLogin, next: "/dashboard?book=7" })).data.redirect,
+    "/dashboard?book=7",
+  );
+  assert.equal(
+    (await request("/login", { ...customerLogin, next: "//other.example/dashboard" })).data.redirect,
+    "/dashboard",
+  );
   const profile = await request("/api/auth-status");
   assert.equal(profile.data.user.email, users[0].email);
   assert.equal(profile.data.user.password_hash, undefined);
@@ -107,13 +131,25 @@ test("HTTP login, profile, signup, and logout with an injected database", async 
   assert.equal((await request("/signup", { ...signup, confirm: "mismatch" })).status, 400);
   assert.equal((await request("/signup", signup)).status, 201);
   assert.equal((await request("/api/auth-status")).data.user.name, "New Traveler");
-  assert.ok(users[1].password_hash.startsWith("scrypt$"));
+  assert.ok(users.find((user) => user.email === signup.email).password_hash.startsWith("scrypt$"));
   assert.equal((await request("/signup", signup)).status, 409);
   assert.equal((await request("/logout", {})).status, 200);
   const registeredLogin = await request("/login", { email: signup.email, password: signup.pass });
   assert.equal(registeredLogin.status, 200);
   assert.equal(registeredLogin.data.user.name, "New Traveler");
   assert.equal((await request("/api/auth-status")).data.user.email, signup.email);
+  const staffLogin = { email: users[1].email, password: "AdminPassword123!" };
+  const admin = await request("/login", staffLogin);
+  assert.equal(admin.status, 200);
+  assert.equal(admin.data.redirect, "/manage");
+  assert.equal(
+    (await request("/login", { ...staffLogin, next: "/manage?view=fleet" })).data.redirect,
+    "/manage?view=fleet",
+  );
+  assert.equal(
+    (await request("/login", { ...staffLogin, next: "/dashboard?book=7" })).data.redirect,
+    "/manage?book=7&view=dashboard",
+  );
   unavailable = true;
   assert.equal((await request("/api/auth-status")).status, 503);
 });

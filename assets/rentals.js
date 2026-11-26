@@ -235,20 +235,20 @@ function filters(labels, render, initial = labels[0]) {
   function apply(label) {
     controls
       .querySelectorAll("button")
-      .forEach((item) => item.setAttribute("aria-pressed", String(item.textContent === label)));
+      .forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.filter === label)));
     content.querySelector("#results").innerHTML = render(label);
   }
   controls.innerHTML = labels
     .map(
       (label) => /* HTML */ `
-        <button type="button">${esc(label)}</button>
+        <button type="button" data-filter="${esc(label)}">${esc(label)}</button>
       `,
     )
     .join("");
   controls.addEventListener("click", (event) => {
     const item = event.target.closest("button");
     if (item) {
-      apply(item.textContent);
+      apply(item.dataset.filter);
     }
   });
   apply(initial);
@@ -266,45 +266,86 @@ function totalFor(reservations, status) {
   );
 }
 
+function renderAdminDashboard(reservations, fleet) {
+  const dateLabel = new Intl.DateTimeFormat("en-PH", {
+    dateStyle: "full",
+    timeZone: "Asia/Manila",
+  }).format(new Date());
+  const categories = new Map();
+
+  for (const { category } of fleet) {
+    categories.set(category, (categories.get(category) ?? 0) + 1);
+  }
+
+  const fleetStatus = [
+    ["Available", "available"],
+    ["Rented", "rented"],
+    ["Maintenance", "maintenance"],
+  ];
+
+  content.innerHTML =
+    heading("Dashboard", dateLabel, button("+ New reservation", "book")) +
+    stats([
+      ["Total fleet", fleet.length],
+      ["Active rentals", count(reservations, "status", "Active")],
+      ["Available vehicles", count(fleet, "fleet_status", "Available")],
+      ["Completed rental value", totalFor(reservations, "Completed")],
+    ]) +
+    /* HTML */ `
+      <div class="columns">
+        <section class="panel admin-recent" aria-labelledby="recent-title">
+          <div class="panel-heading">
+            <h2 id="recent-title">Recent reservations</h2>
+            <a href="${staffUrl("reservations")}">View all</a>
+          </div>
+          ${reservationRows(reservations.slice(0, 5), true)}
+        </section>
+
+        <section class="panel" aria-labelledby="fleet-title">
+          <div class="panel-heading">
+            <h2 id="fleet-title">Fleet status</h2>
+            <a href="${staffUrl("fleet")}">View fleet</a>
+          </div>
+
+          <div class="fleet-status">
+            ${fleetStatus.map(([label, tone]) => {
+              const amount = count(fleet, "fleet_status", label);
+              return /* HTML */ `
+                <div class="fleet-meter">
+                  <div class="fleet-meter-label">
+                    <span id="fleet-${tone}">${label}</span>
+                    <span>${amount} / ${fleet.length}</span>
+                  </div>
+                  <meter class="${tone}" aria-labelledby="fleet-${tone}" value="${amount}" max="${fleet.length || 1}"></meter>
+                </div>
+              `;
+            }).join("")}
+          </div>
+
+          ${categories.size ? /* HTML */ `
+            <h3 class="fleet-category-title">By category</h3>
+            <ul class="fleet-categories">
+              ${[...categories].sort(([a], [b]) => a.localeCompare(b)).map(([category, amount]) =>
+                `<li><span>${esc(category)}</span><strong>${amount}</strong></li>`,
+              ).join("")}
+            </ul>
+          ` : ""}
+        </section>
+      </div>
+    `;
+}
+
+
 async function dashboard() {
   const [reservations, fleet] = await Promise.all([
     api("reservations"),
     api(account.staff ? "inventory" : "fleet"),
   ]);
   if (account.staff) {
-    content.innerHTML =
-      heading("Dashboard", "Fleet and reservation activity", button("+ New reservation", "book")) +
-      stats([
-        ["Total fleet", fleet.length],
-        ["Active rentals", count(reservations, "status", "Active")],
-        ["Available vehicles", count(fleet, "fleet_status", "Available")],
-        ["Completed rental value", totalFor(reservations, "Completed")],
-      ]) +
-      /* HTML */ `
-        <div class="columns">
-          <section class="panel">
-            <h2>Recent reservations</h2>
-            ${reservationRows(reservations.slice(0, 5), true)}
-          </section>
-          <section class="panel">
-            <h2>Fleet status</h2>
-            <ul>
-              ${["Available", "Rented", "Maintenance"]
-                .map(
-                  (status) => /* HTML */ `
-                    <li>
-                      ${pill(status)}
-                      <strong>${count(fleet, "fleet_status", status)} / ${fleet.length}</strong>
-                    </li>
-                  `,
-                )
-                .join("")}
-            </ul>
-          </section>
-        </div>
-      `;
+    renderAdminDashboard(reservations, fleet);
     return;
   }
+
   const next =
     reservations.find((rental) => rental.status === "Active") ||
     reservations
@@ -917,14 +958,29 @@ async function start() {
   view = Object.hasOwn(links, section) ? section : "dashboard";
   document.title = links[view] + " | Wander Wheels";
   document.body.classList.toggle("customer", !account.staff);
+  document.body.classList.toggle("admin", Boolean(account.staff));
+  if (account.staff) {
+    document.querySelector("#workspace-brand").href = staffUrl("dashboard");
+    document.querySelector("#workspace-role").hidden = false;
+  }
   document.querySelector("#account-name").textContent = fullName(account);
-  navigation.innerHTML =
-    Object.entries(links)
-      .map(
-        ([key, label]) =>
-          `<a href="${account.staff ? staffUrl(key) : customerUrl(key)}"${view === key ? ' aria-current="page"' : ""}>${esc(label)}</a>`,
-      )
-      .join("") + '<a href="/home">Public site</a>';
+  const link = (key) => {
+    const url = account.staff ? staffUrl(key) : customerUrl(key);
+    const current = view === key ? ' aria-current="page"' : "";
+    return `<a href="${url}"${current}>${esc(links[key])}</a>`;
+  };
+  const publicSite = '<a href="/home">Public site</a>';
+  if (account.staff) {
+    navigation.innerHTML =
+      '<p>Operations</p>' +
+      ["dashboard", "fleet", "reservations", "maintenance"].map(link).join("") +
+      '<p>Customer records</p>' +
+      ["customers", "users", "licenses", "inquiries"].map(link).join("") +
+      publicSite;
+  } else {
+    navigation.innerHTML = Object.keys(links).map(link).join("") + publicSite;
+  }
+
   await load();
   if (view === "dashboard" && params.has("book")) {
     await booking(params.get("book"));

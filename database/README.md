@@ -42,7 +42,8 @@ email and password to log back in. No additional SQL import is required.
 - The signed-in user's profile appears at the top right of every public page header.
   Open it to see the account email or sign out.
 - `/api/auth-status` reads the signed-in user's record from MySQL and excludes the password hash.
-- Guests can browse the fleet and submit a rental inquiry. Customers manage reservations in `/dashboard`.
+- Guests can browse the fleet and submit a rental inquiry. Sign-in sends customers to `/dashboard` and staff to `/manage`.
+- Hosted installations also need both SQL imports. Grant staff access in the database used by that deployment, since local staff accounts do not carry over.
 - Sessions currently live in Node's memory. Restarting Node signs users out; database
   accounts remain. A persistent session store and HTTPS cookie configuration can be
   added when deploying beyond local development.
@@ -69,4 +70,16 @@ driver licenses, and rental inquiries.
 
 The seed fleet uses sample plates, model years, and mileage. Staff can edit those records.
 Reservation totals are calculated from the daily rate. Contact inquiries store a preferred
-payment method and appear in the staff dashboard. No payment or email service is integrated.
+payment method and appear in the staff dashboard. Payment processing is separate.
+
+## Send inquiry acknowledgments with Gmail
+
+1. In the [Google Cloud console](https://console.cloud.google.com/apis/library/gmail.googleapis.com), enable the Gmail API for your project. Configure Google Auth Platform and add your dedicated Gmail sender as a test user if the app is in Testing.
+2. Under [Clients](https://console.cloud.google.com/auth/clients), create a **Web application** OAuth client. Add `https://developers.google.com/oauthplayground` as an authorized redirect URI.
+3. Open the [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/). In Settings, turn on **Use your own OAuth credentials** and enter that client ID and secret. Keep access type **Offline**.
+4. Enter the scope `https://www.googleapis.com/auth/gmail.send`, click **Authorize APIs**, and sign in as the dedicated Gmail sender. Exchange the authorization code for tokens and copy the **refresh token**.
+5. In the project's Git-ignored `.env`, set `GMAIL_CLIENT_ID`, `GMAIL_CLIENT_SECRET`, `GMAIL_REFRESH_TOKEN`, and `GMAIL_SENDER_EMAIL`. Use the same Gmail address you authorized in Step 4. Restart Node and submit a Contact inquiry to an inbox you can check. For a hosted app, set the same four variables in the host's environment and redeploy.
+
+The acknowledgment goes to the address entered on the form. Wander Wheels saves the inquiry before attempting email, so an unavailable or disabled mailer leaves the inquiry in the staff dashboard. Each app process allows up to 20 email attempts per minute and one per recipient within that window.
+
+Google issues seven-day refresh tokens for external OAuth apps in Testing that request Gmail sending access. Renew the token when it expires, or review [Google's OAuth verification requirements](https://developers.google.com/identity/protocols/oauth2) for longer-lived use.

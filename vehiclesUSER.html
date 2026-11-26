@@ -1,353 +1,353 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Vehicles</title>
-    <link rel="stylesheet" href="/assets/vehiclesUSER.css" />
-    <link rel="stylesheet" href="/assets/navigation.css" />
-    <link rel="stylesheet" href="/assets/account.css" />
-    <script src="/assets/company.js" defer></script>
-    <script src="/assets/catalog.js" defer></script>
-  </head>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vehicles</title>
+		<link rel="stylesheet" href="/assets/vehiclesUSER.css" />
+		<link rel="stylesheet" href="/assets/navigation.css" />
+		<link rel="stylesheet" href="/assets/account.css" />
+		<script src="/assets/company.js" defer></script>
+		<script src="/assets/catalog.js" defer></script>
+	</head>
 
-  <body>
-    <header class="header">
-      <img src="./img/logo.png" alt="Logo" class="logo" />
-      <h1>Wander Wheels</h1>
-      <nav aria-label="Main navigation">
-        <ul>
-          <li><a href="/home">Home</a></li>
-          <li><a href="/vehicles" class="active" aria-current="page">Vehicles</a></li>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/team">Our Team</a></li>
-          <li><a href="/contact">Contact Us</a></li>
-        </ul>
-      </nav>
+	<body>
+		<header class="header">
+			<img src="./img/logo.png" alt="Logo" class="logo" />
+			<h1>Wander Wheels</h1>
+			<nav aria-label="Main navigation">
+				<ul>
+					<li><a href="/home">Home</a></li>
+					<li><a href="/vehicles" class="active" aria-current="page">Vehicles</a></li>
+					<li><a href="/about">About Us</a></li>
+					<li><a href="/team">Our Team</a></li>
+					<li><a href="/contact">Contact Us</a></li>
+				</ul>
+			</nav>
 
-      <div class="buttons" id="buttons-container" style="display: none">
-        <form action="/login" method="GET">
-          <button type="submit" class="login-btn">Sign In</button>
-        </form>
+			<div class="buttons" id="buttons-container" style="display: none">
+				<form action="/login" method="GET">
+					<button type="submit" class="login-btn">Sign In</button>
+				</form>
 
-        <form action="/signup" method="GET">
-          <button type="submit" class="signup-btn">Sign Up</button>
-        </form>
-      </div>
-    </header>
+				<form action="/signup" method="GET">
+					<button type="submit" class="signup-btn">Sign Up</button>
+				</form>
+			</div>
+		</header>
 
-    <div class="title">
-      <h1>VEHICLES</h1>
-    </div>
+		<div class="title">
+			<h1>VEHICLES</h1>
+		</div>
 
-    <div class="car">
-      <img src="./img/display.png" alt="Background Cars" />
-    </div>
+		<div class="car">
+			<img src="./img/display.png" alt="Background Cars" />
+		</div>
 
-    <div class="vehicles">
-      <div class="vehicle-card">
-        <img
-          alt="Chevrolet Trailblazer"
-          height="150"
-          src="/img/Chevrolet Trailblazer SUV.png"
-          width="300"
-        />
-        <div class="title-price">
-          <h3>Chevrolet Trailblazer</h3>
-          <p class="price">₱4800.00</p>
-        </div>
+		<div class="vehicles">
+			<div class="vehicle-card">
+				<img
+					alt="Chevrolet Trailblazer"
+					height="150"
+					src="/img/Chevrolet Trailblazer SUV.png"
+					width="300"
+				/>
+				<div class="title-price">
+					<h3>Chevrolet Trailblazer</h3>
+					<p class="price">₱4800.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>SUV</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal
-          for versatile use.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Chevrolet Trailblazer',
-              'SUV',
-              'The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal for versatile use.',
-              '/img/Chevrolet Trailblazer SUV.png',
-              '₱4800.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>SUV</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal
+					for versatile use.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Chevrolet Trailblazer',
+							'SUV',
+							'The Chevrolet Trailblazer is a compact SUV with spacious cargo and modern features, ideal for versatile use.',
+							'/img/Chevrolet Trailblazer SUV.png',
+							'₱4800.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img alt="Ford Ranger" height="150" src="/img/Ford Ranger PickUp.png" width="300" />
-        <div class="title-price">
-          <h3>Ford Ranger</h3>
-          <p class="price">₱4500.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img alt="Ford Ranger" height="150" src="/img/Ford Ranger PickUp.png" width="300" />
+				<div class="title-price">
+					<h3>Ford Ranger</h3>
+					<p class="price">₱4500.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>Pick Up</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance,
-          spacious cabin, and off-road capabilities, ideal for both work and adventure.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Ford Ranger',
-              'Pick Up',
-              'The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance, spacious cabin, and off-road capabilities, ideal for both work and adventure.',
-              '/img/Ford Ranger PickUp.png',
-              '₱4500.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>Pick Up</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance,
+					spacious cabin, and off-road capabilities, ideal for both work and adventure.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Ford Ranger',
+							'Pick Up',
+							'The Ford Ranger Pickup is a durable and versatile truck, known for its strong performance, spacious cabin, and off-road capabilities, ideal for both work and adventure.',
+							'/img/Ford Ranger PickUp.png',
+							'₱4500.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img alt="Honda Civic" height="150" src="/img/Honda Civic Sedan.jpg" width="300" />
-        <div class="title-price">
-          <h3>Honda Civic</h3>
-          <p class="price">₱2800.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img alt="Honda Civic" height="150" src="/img/Honda Civic Sedan.jpg" width="300" />
+				<div class="title-price">
+					<h3>Honda Civic</h3>
+					<p class="price">₱2800.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>Sedan</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable
-          interior, smooth ride, and advanced safety features, perfect for daily commuting and city
-          driving.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Honda Civic',
-              'Sedan',
-              'The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable interior, smooth ride, and advanced safety features, perfect for daily commuting and city driving.',
-              '/img/Honda Civic Sedan.jpg',
-              '₱2800.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>Sedan</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable
+					interior, smooth ride, and advanced safety features, perfect for daily commuting and city
+					driving.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Honda Civic',
+							'Sedan',
+							'The Honda Civic Sedan is a reliable and fuel-efficient car, offering a comfortable interior, smooth ride, and advanced safety features, perfect for daily commuting and city driving.',
+							'/img/Honda Civic Sedan.jpg',
+							'₱2800.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img alt="Hyundai Accent" height="150" src="/img/Hyundai Accent Sedan.png" width="300" />
-        <div class="title-price">
-          <h3>Hyundai Accent</h3>
-          <p class="price">₱2200.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img alt="Hyundai Accent" height="150" src="/img/Hyundai Accent Sedan.png" width="300" />
+				<div class="title-price">
+					<h3>Hyundai Accent</h3>
+					<p class="price">₱2200.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>Sedan</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious
-          interior and advanced safety features, making it the perfect choice for both city commutes
-          and weekend getaways.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Hyundai Accent',
-              'Sedan',
-              'The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious interior and advanced safety features, making it the perfect choice for both city commutes and weekend getaways.',
-              '/img/Hyundai Accent Sedan.png',
-              '₱2200.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>Sedan</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious
+					interior and advanced safety features, making it the perfect choice for both city commutes
+					and weekend getaways.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Hyundai Accent',
+							'Sedan',
+							'The Hyundai Accent Sedan delivers a comfortable, fuel-efficient ride with a spacious interior and advanced safety features, making it the perfect choice for both city commutes and weekend getaways.',
+							'/img/Hyundai Accent Sedan.png',
+							'₱2200.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img alt="Kia Sorento" height="150" src="/img/Kia Sorento SUV.png" width="300" />
-        <div class="title-price">
-          <h3>Kia Sorento</h3>
-          <p class="price">₱4200.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img alt="Kia Sorento" height="150" src="/img/Kia Sorento SUV.png" width="300" />
+				<div class="title-price">
+					<h3>Kia Sorento</h3>
+					<p class="price">₱4200.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>SUV</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Kia Sorento SUV combines a spacious interior, flexible seating, and advanced
-          technology, offering comfort, convenience, and versatility for family trips, daily
-          errands, and weekend getaways.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Kia Sorento',
-              'SUV',
-              'The Kia Sorento SUV combines a spacious interior, flexible seating, and advanced technology, offering comfort, convenience, and versatility for family trips, daily errands, and weekend getaways.',
-              '/img/Kia Sorento SUV.png',
-              '₱4200.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>SUV</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Kia Sorento SUV combines a spacious interior, flexible seating, and advanced
+					technology, offering comfort, convenience, and versatility for family trips, daily
+					errands, and weekend getaways.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Kia Sorento',
+							'SUV',
+							'The Kia Sorento SUV combines a spacious interior, flexible seating, and advanced technology, offering comfort, convenience, and versatility for family trips, daily errands, and weekend getaways.',
+							'/img/Kia Sorento SUV.png',
+							'₱4200.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img
-          alt="Mitsubishi Montero"
-          height="150"
-          src="/img/Mitsubishi Montero SUV.png"
-          width="300"
-        />
-        <div class="title-price">
-          <h3>Mitsubishi Montero</h3>
-          <p class="price">₱4000.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img
+					alt="Mitsubishi Montero"
+					height="150"
+					src="/img/Mitsubishi Montero SUV.png"
+					width="300"
+				/>
+				<div class="title-price">
+					<h3>Mitsubishi Montero</h3>
+					<p class="price">₱4000.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>SUV</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Mitsubishi Montero SUV is offering ample space, off-road capability, and advanced
-          features for all your adventures.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Mitsubishi Montero',
-              'SUV',
-              'The Mitsubishi Montero SUV is a rugged and reliable vehicle, offering ample space, off-road capability, and advanced features for all your adventures.',
-              '/img/Mitsubishi Montero SUV.png',
-              '₱4000.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>SUV</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Mitsubishi Montero SUV is offering ample space, off-road capability, and advanced
+					features for all your adventures.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Mitsubishi Montero',
+							'SUV',
+							'The Mitsubishi Montero SUV is a rugged and reliable vehicle, offering ample space, off-road capability, and advanced features for all your adventures.',
+							'/img/Mitsubishi Montero SUV.png',
+							'₱4000.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img alt="Nissan Navara" height="150" src="/img/Nissan Navara Pickup.png" width="300" />
-        <div class="title-price">
-          <h3>Nissan Navara</h3>
-          <p class="price">₱4300.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img alt="Nissan Navara" height="150" src="/img/Nissan Navara Pickup.png" width="300" />
+				<div class="title-price">
+					<h3>Nissan Navara</h3>
+					<p class="price">₱4300.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>Pick Up</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Nissan Navara Pickup is a durable and versatile truck, designed for both work and
-          play, with robust towing capacity and a comfortable interior.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Nissan Navara',
-              'Pick Up',
-              'The Nissan Navara Pickup is a durable and versatile truck, designed for both work and play, with robust towing capacity and a comfortable interior.',
-              '/img/Nissan Navara Pickup.png',
-              '₱4300.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>Pick Up</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Nissan Navara Pickup is a durable and versatile truck, designed for both work and
+					play, with robust towing capacity and a comfortable interior.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Nissan Navara',
+							'Pick Up',
+							'The Nissan Navara Pickup is a durable and versatile truck, designed for both work and play, with robust towing capacity and a comfortable interior.',
+							'/img/Nissan Navara Pickup.png',
+							'₱4300.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img alt="Suzuki Ertiga" height="150" src="/img/Suzuki Ertiga MPV.png" width="300" />
-        <div class="title-price">
-          <h3>Suzuki Ertiga</h3>
-          <p class="price">₱3000.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img alt="Suzuki Ertiga" height="150" src="/img/Suzuki Ertiga MPV.png" width="300" />
+				<div class="title-price">
+					<h3>Suzuki Ertiga</h3>
+					<p class="price">₱3000.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>MPV</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options,
-          making it perfect for everyday use and road trips.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Suzuki Ertiga',
-              'MPV',
-              'The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options, making it perfect for everyday use and road trips.',
-              '/img/Suzuki Ertiga MPV.png',
-              '₱3000.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
+				<div class="type-car">
+					<p>MPV</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options,
+					making it perfect for everyday use and road trips.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Suzuki Ertiga',
+							'MPV',
+							'The Suzuki Ertiga MPV offers spacious seating for families, and flexible cargo options, making it perfect for everyday use and road trips.',
+							'/img/Suzuki Ertiga MPV.png',
+							'₱3000.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
 
-      <div class="vehicle-card">
-        <img alt="Toyota Corolla" height="150" src="/img/Toyota Corolla Sedan.png" width="300" />
-        <div class="title-price">
-          <h3>Toyota Corolla</h3>
-          <p class="price">₱2500.00</p>
-        </div>
+			<div class="vehicle-card">
+				<img alt="Toyota Corolla" height="150" src="/img/Toyota Corolla Sedan.png" width="300" />
+				<div class="title-price">
+					<h3>Toyota Corolla</h3>
+					<p class="price">₱2500.00</p>
+				</div>
 
-        <div class="type-car">
-          <p>Sedan</p>
-          <p class="perday">per day</p>
-        </div>
-        <p class="description">
-          The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety
-          features, ideal for city driving and long trips.
-        </p>
-        <button
-          onclick="
-            openModal(
-              'Toyota Corolla',
-              'Sedan',
-              'The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety features, ideal for city driving and long trips.',
-              '/img/Toyota Corolla Sedan.png',
-              '₱2500.00',
-            )
-          "
-        >
-          View Details
-        </button>
-      </div>
-    </div>
+				<div class="type-car">
+					<p>Sedan</p>
+					<p class="perday">per day</p>
+				</div>
+				<p class="description">
+					The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety
+					features, ideal for city driving and long trips.
+				</p>
+				<button
+					onclick="
+						openModal(
+							'Toyota Corolla',
+							'Sedan',
+							'The Toyota Corolla Sedan is a reliable and fuel-efficient car with advanced safety features, ideal for city driving and long trips.',
+							'/img/Toyota Corolla Sedan.png',
+							'₱2500.00',
+						)
+					"
+				>
+					View Details
+				</button>
+			</div>
+		</div>
 
-    <footer>Copyright © 2024 - Wander Wheels. All Rights Reserved.</footer>
+		<footer>Copyright © 2024 - Wander Wheels. All Rights Reserved.</footer>
 
-    <div class="modal" id="myModal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img
-          id="modalImage"
-          src=""
-          alt="Car Image"
-          style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px"
-        />
-        <h2 id="modalTitle"></h2>
-        <p id="modalType"></p>
-        <p class="price" id="modalPrice"></p>
-        <p id="modalDescription"></p>
-        <button id="bookButton" onclick="bookCar()">Book</button>
-      </div>
-    </div>
+		<div class="modal" id="myModal">
+			<div class="modal-content">
+				<span class="close" onclick="closeModal()">&times;</span>
+				<img
+					id="modalImage"
+					src=""
+					alt="Car Image"
+					style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 15px"
+				/>
+				<h2 id="modalTitle"></h2>
+				<p id="modalType"></p>
+				<p class="price" id="modalPrice"></p>
+				<p id="modalDescription"></p>
+				<button id="bookButton" onclick="bookCar()">Book</button>
+			</div>
+		</div>
 
-    <script>
+		<script>
       function openModal(title, type, description, image, price) {
         document.getElementById("modalTitle").innerText = title;
         document.getElementById("modalType").innerText = type;
@@ -374,5 +374,5 @@
         }
       };
     </script>
-  </body>
+	</body>
 </html>
