@@ -253,11 +253,32 @@
 						maxlength="3000"
 						placeholder="Anything else we should know?"
 					></textarea>
-					<button class="button" type="submit">Submit inquiry</button>
+					<button class="button contact-submit" type="submit">
+						<span id="contact-spinner" class="contact-spinner" aria-hidden="true" hidden></span>
+						<span id="contact-submit-label">Submit inquiry</span>
+					</button>
 					<p id="form-status" role="status" tabindex="-1"></p>
 				</form>
 			</section>
 		</main>
+
+		<dialog
+			id="inquiry-sent"
+			class="inquiry-dialog"
+			aria-labelledby="inquiry-sent-title"
+			aria-describedby="inquiry-sent-description"
+		>
+			<span class="inquiry-dialog-mark" aria-hidden="true">✓</span>
+			<h2 id="inquiry-sent-title">Email sent</h2>
+			<p id="inquiry-sent-description">
+				Your inquiry acknowledgment was sent to <strong id="inquiry-sent-email"></strong>.
+			</p>
+			<p class="inquiry-dialog-reference">Inquiry reference <strong id="inquiry-sent-reference"></strong></p>
+
+			<form method="dialog">
+				<button class="button" type="submit" autofocus>Done</button>
+			</form>
+		</dialog>
 
 		<footer class="site-footer">
 			<div class="footer-grid">

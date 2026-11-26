@@ -3,12 +3,25 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const path = require("path");
 const { randomBytes } = require("crypto");
+const tls = require("node:tls");
 const mysql = require("mysql2/promise");
 const { registerAuthRoutes } = require("./lib/auth");
 const { registerRentalRoutes } = require("./lib/rentals");
 
 if (require("fs").existsSync(path.join(__dirname, ".env"))) {
   process.loadEnvFile(path.join(__dirname, ".env"));
+}
+
+// Include Windows-trusted certificate authorities for requests to Gmail and Google OAuth.
+if (
+  process.platform === "win32" &&
+  process.env.GMAIL_CLIENT_ID?.trim() &&
+  typeof tls.setDefaultCACertificates === "function"
+) {
+  tls.setDefaultCACertificates([
+    ...tls.getCACertificates("default"),
+    ...tls.getCACertificates("system"),
+  ]);
 }
 
 const pool = mysql.createPool({
